@@ -294,7 +294,7 @@ class DocumentEditor:
         if target_index != -1:
             target_paragraph = self.document.paragraphs[target_index]
             run = target_paragraph.add_run()
-            run.add_picture(imagen_SH, width=Inches(5.9), height=Inches(5.1))
+            run.add_picture(imagen_SH, width=Inches(6.9), height=Inches(3.9))
             return True
         return False
 

@@ -67,8 +67,8 @@ class DocumentEditor:
         for i in range(len(main_pdf.pages)):
             page = main_pdf.pages[i]
             text = page.extract_text()
-            if "3. CARGA VIENTO" in text:
-                insert_page = i
+            if "El cliente deberá supervisar los planos para corroborar que la geometría de planos y la real se corresponden, supervisar la tensión transmitida por el contrapeso y anclajes, la capacidad de la fachada y medianeras, etc., y avisar inmediatamente a INCYE en el caso de detectar algún error o producirse algún tipo de modificación de geometrías o cargas sobre la estructura de INCYE." in text:
+                insert_page = i + 1
                 break
 
         pdf_writer = PyPDF2.PdfWriter()
@@ -103,7 +103,7 @@ class DocumentEditor:
     def convert_to_pdf(word_file_path, pdf_file_path):
         convert(word_file_path, pdf_file_path)
 
-    # Localizamos esto para meter la imagen de carga de viento
+    # Localizamos esto para meter la imagen de carga de viento ##########################
     def buscar_cargaviento(self, texto_viento):
         for i, paragraph in enumerate(self.document.paragraphs):
             if texto_viento in paragraph.text:
@@ -115,7 +115,45 @@ class DocumentEditor:
         if target_index != -1:
             target_paragraph = self.document.paragraphs[target_index]
             run = target_paragraph.add_run()
-            run.add_picture(imagen_viento, width=Inches(7), height=Inches(9.2))
+            run.add_picture(imagen_viento, width=Inches(6.9), height=Inches(9))
+            return True 
+        return False
+    
+    # Localizamos esto para meter la imagen de cCOMPROBACiÓN DEL PÓRTICO ##########################
+    def buscar_portico(self, texto_portico):
+        for i, paragraph in enumerate(self.document.paragraphs):
+            if texto_portico in paragraph.text:
+                return i+1
+            return -1
+        
+    def añadir_img_portico(self, texto_portico, imagen_portico1, imagen_portico2, imagen_portico3, imagen_portico4, imagen_portico5):
+        target_index = self.buscar_txt_añTDS(texto_portico)
+        if target_index != -1:
+            target_paragraph = self.document.paragraphs[target_index]
+            run = target_paragraph.add_run()
+            run.add_picture(imagen_portico1, width=Inches(5), height=Inches(1.1))
+            run.add_picture(imagen_portico2, width=Inches(6.9), height=Inches(2.5))
+            run.add_picture(imagen_portico3, width=Inches(3.9), height=Inches(0.8))
+            run.add_picture(imagen_portico4, width=Inches(6.9), height=Inches(3))
+            run.add_picture(imagen_portico5, width=Inches(6.9), height=Inches(3))
+            return True 
+        return False
+    
+    # Localizamos esto para meter la imagen de COMPROBACIÓN DE CONTRAPESOS ##########################
+    def buscar_contrap(self, texto_contrap):
+        for i, paragraph in enumerate(self.document.paragraphs):
+            if texto_contrap in paragraph.text:
+                return i+1
+            return -1
+        
+    def añadir_img_contrap(self, texto_contrap, imagen_contrap1, imagen_contrap2, imagen_contrap3):
+        target_index = self.buscar_txt_añTDS(texto_contrap)
+        if target_index != -1:
+            target_paragraph = self.document.paragraphs[target_index]
+            run = target_paragraph.add_run()
+            run.add_picture(imagen_contrap1, width=Inches(6.9), height=Inches(1.5))
+            run.add_picture(imagen_contrap2, width=Inches(6.9), height=Inches(3))
+            run.add_picture(imagen_contrap3, width=Inches(6.9), height=Inches(3))
             return True 
         return False
 
@@ -492,15 +530,65 @@ class Application(tk.Frame):
         c_eolico = self.ceol_entry.get()
 
         wb_file_name = self.apendice_path
-        outputPNGImage = 'C:/Memorias y servidor/Estabilizadores/carga_viento.jpg'
+        img_viento = 'C:/Memorias y servidor/Estabilizadores/carga_viento.jpg'
+        img_port1 = 'C:/Memorias y servidor/Estabilizadores/portico1.jpg'
+        img_port2 = 'C:/Memorias y servidor/Estabilizadores/portico2.jpg'
+        img_port3 = 'C:/Memorias y servidor/Estabilizadores/portico3.jpg'
+        img_port4 = 'C:/Memorias y servidor/Estabilizadores/portico4.jpg'
+        img_port5 = 'C:/Memorias y servidor/Estabilizadores/portico5.jpg'
+        img_cont1 = 'C:/Memorias y servidor/Estabilizadores/contrapeso1.jpg'
+        img_cont2 = 'C:/Memorias y servidor/Estabilizadores/contrapeso2.jpg'
+        img_cont3 = 'C:/Memorias y servidor/Estabilizadores/contrapeso3.jpg'
         xls_file = win32com.client.gencache.EnsureDispatch("Excel.Application")
         wb = xls_file.Workbooks.Open(Filename=wb_file_name)
         xls_file.DisplayAlerts = False 
         ws = wb.Worksheets("Estabilizador")
+
+        # Imagen de la carga de viento
         ws.Range(ws.Cells(46,1),ws.Cells(110,14)).CopyPicture(Format= win32com.client.constants.xlBitmap)  # example from cell (1,1) to cell (15,3)
         img = ImageGrab.grabclipboard()
-        img.save(outputPNGImage)
+        img.save(img_viento)
+
+        # Imágenes del pórtico, del 1 al 5
+        ws.Range(ws.Cells(151,1),ws.Cells(157,8)).CopyPicture(Format= win32com.client.constants.xlBitmap) 
+        img = ImageGrab.grabclipboard()
+        img.save(img_port1)
+        ws.Range(ws.Cells(168,7),ws.Cells(201,25)).CopyPicture(Format= win32com.client.constants.xlBitmap) 
+        img = ImageGrab.grabclipboard()
+        img.save(img_port2)
+        ws.Range(ws.Cells(202,1),ws.Cells(205,6)).CopyPicture(Format= win32com.client.constants.xlBitmap) 
+        img = ImageGrab.grabclipboard()
+        img.save(img_port3)
+        ws.Range(ws.Cells(206,7),ws.Cells(230,15)).CopyPicture(Format= win32com.client.constants.xlBitmap) 
+        img = ImageGrab.grabclipboard()
+        img.save(img_port4)
+        ws.Range(ws.Cells(206,17),ws.Cells(229,24)).CopyPicture(Format= win32com.client.constants.xlBitmap) 
+        img = ImageGrab.grabclipboard()
+        img.save(img_port5)
+
+        # Imágenes de contrapesos del 1 al 3
+        ws.Range(ws.Cells(114,1),ws.Cells(124,16)).CopyPicture(Format= win32com.client.constants.xlBitmap) 
+        img = ImageGrab.grabclipboard()
+        img.save(img_cont1)
+        ws.Range(ws.Cells(126,7),ws.Cells(149,15)).CopyPicture(Format= win32com.client.constants.xlBitmap) 
+        img = ImageGrab.grabclipboard()
+        img.save(img_cont2)
+        ws.Range(ws.Cells(126,17),ws.Cells(149,24)).CopyPicture(Format= win32com.client.constants.xlBitmap) 
+        img = ImageGrab.grabclipboard()
+        img.save(img_cont3)
+
         wb.Close(SaveChanges=False, Filename=wb_file_name)
+
+        #wb_file_name = self.apendice_path
+        #outputPNGImage = 'C:/Memorias y servidor/Estabilizadores/carga_viento.jpg'
+        #xls_file = win32com.client.gencache.EnsureDispatch("Excel.Application")
+        #wb = xls_file.Workbooks.Open(Filename=wb_file_name)
+        #xls_file.DisplayAlerts = False 
+        #ws = wb.Worksheets("Estabilizador")
+        #ws.Range(ws.Cells(46,1),ws.Cells(110,14)).CopyPicture(Format= win32com.client.constants.xlBitmap)  # example from cell (1,1) to cell (15,3)
+        #img = ImageGrab.grabclipboard()
+        #img.save(outputPNGImage)
+        #wb.Close(SaveChanges=False, Filename=wb_file_name)
                 
         additional_info = {
         "José M. Maldonado": "José Manuel Maldonado.\nMáster Ingeniero de Caminos, CC. y PP.\nDpto. Ingeniería INCYE.",
@@ -719,9 +807,23 @@ class Application(tk.Frame):
             imagen_TDS_MP10 = "C:/Memorias y servidor/Aplicacion de Memorias/TDSs/Megaprop/TDS Megaprop INCYE-10.jpg"
             imagen_TDS_MP11 = "C:/Memorias y servidor/Aplicacion de Memorias/TDSs/Megaprop/TDS Megaprop INCYE-11.jpg"
 
-            # Imagen del viento 
+            # Imagen del viento y su texto correspondiente
             imagen_viento = "C:/Memorias y servidor/Estabilizadores/carga_viento.jpg"
             texto_viento= "3. CARGA VIENTO"
+
+            # Imagen del pórtico y su texto correspondiente
+            imagen_portico1 = "C:/Memorias y servidor/Estabilizadores/portico1.jpg"
+            imagen_portico2 = "C:/Memorias y servidor/Estabilizadores/portico2.jpg"
+            imagen_portico3 = "C:/Memorias y servidor/Estabilizadores/portico3.jpg"
+            imagen_portico4 = "C:/Memorias y servidor/Estabilizadores/portico4.jpg"
+            imagen_portico5 = "C:/Memorias y servidor/Estabilizadores/portico5.jpg"
+            texto_portico = "4. COMPROBACIÓN PÓRTICO"
+
+            # Imagen del contrapeso y su texto correspondiente
+            texto_contrap = "5.1. Contrapesos"
+            img_contrap1 = 'C:/Memorias y servidor/Estabilizadores/contrapeso1.jpg'
+            img_contrap2 = 'C:/Memorias y servidor/Estabilizadores/contrapeso2.jpg'
+            img_contrap3 = 'C:/Memorias y servidor/Estabilizadores/contrapeso3.jpg'
 
             # Falta el TDS del Lolashor 
 
@@ -741,11 +843,15 @@ class Application(tk.Frame):
 
             if checkbox_values[0] or checkbox_values[1] or checkbox_values[2] or checkbox_values[3]:
                 added_im_viento = document_editor.añadir_img_viento(texto_viento, imagen_viento)
+            if checkbox_values[0] or checkbox_values[1]:
+                added_im_portico = document_editor.añadir_img_portico(texto_portico, imagen_portico1, imagen_portico2, imagen_portico3, imagen_portico4, imagen_portico5)
+            if checkbox_values[0] or checkbox_values[1]:
+                added_im_contrap = document_editor.añadir_img_contrap(texto_contrap, img_contrap1, img_contrap2, img_contrap3)
 
             start_paragraph_index = 50
             end_paragraph_index = 65 
 
-            if added_imagen_SS or added_imagen_MP or added_imagen_GS or added_imagen_TDS_SS or added_imagen_TDS_GS or added_imagen_TDS_MP or added_im_viento:
+            if added_imagen_SS or added_imagen_MP or added_imagen_GS or added_imagen_TDS_SS or added_imagen_TDS_GS or added_imagen_TDS_MP or added_im_viento or added_im_portico or added_im_contrap:
                 if self.output_path:
                     document_editor.remove_empty_paragraphs_between_range(start_paragraph_index, end_paragraph_index)
                     
