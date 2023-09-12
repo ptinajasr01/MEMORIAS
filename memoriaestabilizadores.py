@@ -131,11 +131,11 @@ class DocumentEditor:
         if target_index != -1:
             target_paragraph = self.document.paragraphs[target_index]
             run = target_paragraph.add_run()
-            run.add_picture(imagen_portico1, width=Inches(5), height=Inches(1.4))
+            run.add_picture(imagen_portico1, width=Inches(5), height=Inches(0.9))
             run.add_picture(imagen_portico2, width=Inches(6.9), height=Inches(2.5))
-            run.add_picture(imagen_portico3, width=Inches(6.9), height=Inches(1.4))
-            run.add_picture(imagen_portico4, width=Inches(6.9), height=Inches(3))
-            run.add_picture(imagen_portico5, width=Inches(6.9), height=Inches(3))
+            run.add_picture(imagen_portico3, width=Inches(3.1), height=Inches(0.7))
+            run.add_picture(imagen_portico4, width=Inches(6.1), height=Inches(2.1))
+            run.add_picture(imagen_portico5, width=Inches(6.1), height=Inches(1.9))
             return True 
         return False
     
@@ -152,8 +152,8 @@ class DocumentEditor:
             target_paragraph = self.document.paragraphs[target_index]
             run = target_paragraph.add_run()
             run.add_picture(imagen_contrap1, width=Inches(6.9), height=Inches(1.5))
-            run.add_picture(imagen_contrap2, width=Inches(6.9), height=Inches(3))
-            run.add_picture(imagen_contrap3, width=Inches(6.9), height=Inches(3))
+            run.add_picture(imagen_contrap2, width=Inches(6.9), height=Inches(2.3))
+            run.add_picture(imagen_contrap3, width=Inches(6.9), height=Inches(2.4))
             return True 
         return False
 
