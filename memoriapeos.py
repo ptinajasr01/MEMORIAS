@@ -855,6 +855,7 @@ class Application(tk.Frame):
             imagen_TDS_SH4 = "C:/Memorias y servidor/Apeos/TDSs/KS/TI 00 02 - Kwikstage Shoring (1)-4.jpg"
             imagen_TDS_SH5 = "C:/Memorias y servidor/Apeos/TDSs/KS/TI 00 02 - Kwikstage Shoring (1)-5.jpg"
 
+            #### FALTA EL TDS DEL ALSHOR, CON ESTO ESTARÁ COMPLETA
 
 
             document_editor = DocumentEditor(document_path)
