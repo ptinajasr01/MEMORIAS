@@ -12,6 +12,8 @@ from docx.shared import Inches
 from docx2pdf import convert
 from tkinter import filedialog
 import PyPDF2
+import getpass
+username = getpass.getuser()
 
 
 
@@ -696,6 +698,7 @@ class Application(tk.Frame):
         # Ruta de guardado
         doc_modified = "C:/Memorias y servidor/Apeos/Plantilla_apeos.docx"
         document.write(doc_modified)
+        
 
         if __name__ == '__main__':
             document_path = 'C:/Memorias y servidor/Apeos/Plantilla_apeos.docx'
@@ -729,8 +732,10 @@ class Application(tk.Frame):
 
 
             # texto e imagenes del Shoring 75
+            username = getpass.getuser()
             texto_SH = "El sistema Kwikstage Shoring 75 es un sistema de cimbra de acero con una capacidad de carga de hasta 75 kN, compuesto por bases ajustables, verticales, espigas, horizontales y horquillas ajustables. Junto con el sistema Kwikstage Shoring 75 se utilizarán vigas Superslim como vigas de reparto."
-            imagen_SH = "C:/Memorias y servidor/Apeos/Imagenes/KS.png"
+            imagen_SH = f"C:/Users/{username}/Incye/Ingenieria - MACROS_21/Automaticos_Biblioteca/KS.png"
+            # "C:/Memorias y servidor/Apeos/Imagenes/KS.png"
 
             # Imagenes TDS del SuperSlim
             imagen_TDS_SS1 = "C:/Memorias y servidor/Aplicacion de Memorias/TDSs/SS/ANEJO SS-01.jpg"
@@ -856,7 +861,6 @@ class Application(tk.Frame):
             imagen_TDS_SH5 = "C:/Memorias y servidor/Apeos/TDSs/KS/TI 00 02 - Kwikstage Shoring (1)-5.jpg"
 
             #### FALTA EL TDS DEL ALSHOR, CON ESTO ESTARÁ COMPLETA
-
 
             document_editor = DocumentEditor(document_path)
             added_imagen_SS = document_editor.añadir_im_SS(texto_SS, imagen_SS)
