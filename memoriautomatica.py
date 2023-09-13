@@ -995,7 +995,7 @@ class Application(tk.Frame):
         if checkbox_values[5]:  # Pipeshor 6
             document.merge(Pip6="El sistema Pipeshor 6 (área sección 234,4 cm2) está formado por tubos de 610 mm de diámetro y sus elementos asociados. Fabricado con acero de calidad S355 y un espesor de 12,5 milímetros.")
         if checkbox_values2[0]:  # Granshor
-            document.merge(GS="El sistema Granshor (área sección 72,59 cm2/cordón x 2 cordones) es un sistema de de celosías modular y sus elementos asociados. Fabricado con acero S355.")
+            document.merge(GS="El sistema Granshor (área sección 72,59 cm2/cordón x 2 cordones) es un sistema de celosías modular y sus elementos asociados. Fabricado con acero S355.")
         if checkbox_values2[1]:  # INCYE300
             document.merge(I300="Las vigas de reparto perimetrales se realizarán mediante la utilización de vigas INCYE300, consistentes en vigas HEB300 reforzadas.")
         if checkbox_values2[2] or checkbox_values2[3]:  # INCYE450 SA o TA
