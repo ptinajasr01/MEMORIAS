@@ -794,14 +794,6 @@ class Application(tk.Frame):
         self.codigo_entry = tk.Entry(self.codigo_frame, font=("Helvetica", 14))
         self.codigo_entry.pack(side=tk.RIGHT, padx=15, expand=True, fill=tk.X)
 
-        # Obra
-        self.obra_frame = tk.Frame(self, bg="#F5F5F5")
-        self.obra_frame.pack(pady=15)
-        self.obra_label = tk.Label(self.obra_frame, text="Obra:", font=("Helvetica", 14), bg="#F5F5F5", fg="#333333")
-        self.obra_label.pack(side=tk.LEFT, padx=15)
-        self.obra_entry = tk.Entry(self.obra_frame, font=("Helvetica", 14))
-        self.obra_entry.pack(side=tk.RIGHT, padx=15, expand=True, fill=tk.X)
-
         # Direcci�n de la Obra
         self.dir_obra_frame = tk.Frame(self, bg="#F5F5F5")
         self.dir_obra_frame.pack(pady=15)
@@ -900,7 +892,6 @@ class Application(tk.Frame):
     def fill_template(self):
         # Las entradas de texto
         nombre_cliente = self.nombre_cliente_entry.get()
-        obra = self.obra_entry.get()
         Direccion_obra = self.Direccion_obra_entry.get()
         codigo = self.codigo_entry.get()
         selected_option2 = self.combobox_revisor.get()
@@ -972,7 +963,7 @@ class Application(tk.Frame):
         document = MailMerge(template)
 
         # Sustituimos valores
-        document.merge(Nombre_Cliente=nombre_cliente, Obra=obra, Direccion_Obra=Direccion_obra, Codigo_Obra=codigo, Fecha=formatted_date, Dia=dia, Mes=mes, Anyo=anyo, Autor_NotaC=autor_nota, Revisor_NotaC=revisor_nota, Inic_AutorNC = siglas_autor, Inic_RevNC = siglas_rev, Ciudad=ciudad)
+        document.merge(Nombre_Cliente=nombre_cliente, Direccion_Obra=Direccion_obra, Codigo_Obra=codigo, Fecha=formatted_date, Dia=dia, Mes=mes, Anyo=anyo, Autor_NotaC=autor_nota, Revisor_NotaC=revisor_nota, Inic_AutorNC = siglas_autor, Inic_RevNC = siglas_rev, Ciudad=ciudad)
 
         # Obtener los valores de las checkboxes
         checkbox_values = list(self.checkbar.state())
