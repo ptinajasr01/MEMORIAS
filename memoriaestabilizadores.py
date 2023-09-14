@@ -67,8 +67,8 @@ class DocumentEditor:
         for i in range(len(main_pdf.pages)):
             page = main_pdf.pages[i]
             text = page.extract_text()
-            if "El cliente deberá supervisar los planos para corroborar que la geometría de planos y la real se corresponden, supervisar la tensión transmitida por el contrapeso y anclajes, la capacidad de la fachada y medianeras, etc., y avisar inmediatamente a INCYE en el caso de detectar algún error o producirse algún tipo de modificación de geometrías o cargas sobre la estructura de INCYE." in text:
-                insert_page = i + 1
+            if "3. CARGA VIENTO" in text:
+                insert_page = i 
                 break
 
         pdf_writer = PyPDF2.PdfWriter()
@@ -115,7 +115,7 @@ class DocumentEditor:
         if target_index != -1:
             target_paragraph = self.document.paragraphs[target_index]
             run = target_paragraph.add_run()
-            run.add_picture(imagen_viento, width=Inches(6.9), height=Inches(9))
+            run.add_picture(imagen_viento, width=Inches(6.9), height=Inches(9.1))
             return True 
         return False
     
@@ -151,9 +151,9 @@ class DocumentEditor:
         if target_index != -1:
             target_paragraph = self.document.paragraphs[target_index]
             run = target_paragraph.add_run()
-            run.add_picture(imagen_contrap1, width=Inches(6.9), height=Inches(1.5))
-            run.add_picture(imagen_contrap2, width=Inches(6.9), height=Inches(2.3))
-            run.add_picture(imagen_contrap3, width=Inches(6.9), height=Inches(2.4))
+            run.add_picture(imagen_contrap1, width=Inches(6.9), height=Inches(1.4))
+            run.add_picture(imagen_contrap2, width=Inches(6.9), height=Inches(2.2))
+            run.add_picture(imagen_contrap3, width=Inches(6.9), height=Inches(2.1))
             return True 
         return False
 
@@ -171,7 +171,7 @@ class DocumentEditor:
         if target_index != -1:
             target_paragraph = self.document.paragraphs[target_index]
             run = target_paragraph.add_run()
-            run.add_picture(imagen_SS, width=Inches(6.9), height=Inches(2.1))
+            run.add_picture(imagen_SS, width=Inches(6.7), height=Inches(2.1))
             return True
         return False
 
@@ -227,7 +227,7 @@ class DocumentEditor:
         if target_index != -1:
             target_paragraph = self.document.paragraphs[target_index]
             run = target_paragraph.add_run()
-            run.add_picture(imagen_MP, width=Inches(6.9), height=Inches(2.1))
+            run.add_picture(imagen_MP, width=Inches(6.5), height=Inches(2.1))
             return True
         return False
 
@@ -265,7 +265,7 @@ class DocumentEditor:
         if target_index != -1:
             target_paragraph = self.document.paragraphs[target_index]
             run = target_paragraph.add_run()
-            run.add_picture(imagen_GS, width=Inches(6.9), height=Inches(2.1))
+            run.add_picture(imagen_GS, width=Inches(6.5), height=Inches(2.1))
             return True
         return False
 
@@ -324,17 +324,20 @@ class DocumentEditor:
         if target_index != -1:
             target_paragraph = self.document.paragraphs[target_index]
             run = target_paragraph.add_run()
-            run.add_picture(imagen_LS, width=Inches(6.9), height=Inches(3.9))
+            run.add_picture(imagen_LS, width=Inches(6.5), height=Inches(2.1))
             return True
         return False
 
     # añadir TDS del Tensor Cuadrado
-    def añadir_TDS_LS(self, texto_apendice, imagen_TDS_LS1):
+    def añadir_TDS_LS(self, texto_apendice, imagen_TDS_LS1, imagen_TDS_LS2, imagen_TDS_LS3, imagen_TDS_LS4):
         target_index = self.buscar_txt_añTDS(texto_apendice)
         if target_index != -1:
             target_paragraph = self.document.paragraphs[target_index]
             run = target_paragraph.add_run()
-            run.add_picture(imagen_TDS_LS1, width=Inches(6.8), height=Inches(2.5))
+            run.add_picture(imagen_TDS_LS1, width=Inches(6.8), height=Inches(9.1))
+            run.add_picture(imagen_TDS_LS2, width=Inches(6.8), height=Inches(9.1))
+            run.add_picture(imagen_TDS_LS3, width=Inches(6.8), height=Inches(9.1))
+            run.add_picture(imagen_TDS_LS4, width=Inches(6.8), height=Inches(9.1))
             return True 
         return False
 
@@ -681,9 +684,9 @@ class Application(tk.Frame):
         if checkbox_values2[1]:   # Megaprop
             document.merge(MP="El sistema Megaprop (área sección 58,45 cm2) es un sistema de perfilería constituido por vigas compuestas formadas por dos perfiles en C, unidos mediante presillas situadas en distintas posiciones que configuran un sistema de vigas modulares de gran versatilidad. El acero utilizado para su fabricación es de la calidad S355.")
         if checkbox_values2[2]:  # Granshor
-            document.merge(GS="El sistema Granshor (área sección 72,59 cm2/cordón x 2 cordones) es un sistema de de celosías modular y sus elementos asociados. Fabricado con acero S355.")        
+            document.merge(GS="El sistema Granshor (área sección 72,59 cm2/cordón x 2 cordones) es un sistema de celosías modular y sus elementos asociados. Fabricado con acero S355.")        
         if checkbox_values2[3]:  # Lolashor
-            document.merge(Lola="texto del lolashor")
+            document.merge(LS="Sistema de puntales temporales formado por marcos de celosía compuestos por tubos diámetro 48,3x3,2mm atornillados entre sí mediante tornillos M16 de calidad 8.8. Estos marcos se arriostrarán mediante bastidores formados con el mismo material, uniendo los marcos mediante grapas fijas a los marcos de arriostramiento.")
 
 
         ## textos de la metodología de cálculo 
@@ -726,8 +729,12 @@ class Application(tk.Frame):
             imagen_MP = "C:/Memorias y servidor/Aplicacion de Memorias/Imagenes/megaprop.JPG"
             
             # texto e imágenes del Granshor
-            texto_GS = "El sistema Granshor (área sección 72,59 cm2/cordón x 2 cordones) es un sistema de de celosías modular y sus elementos asociados. Fabricado con acero S355."
+            texto_GS = "El sistema Granshor (área sección 72,59 cm2/cordón x 2 cordones) es un sistema de celosías modular y sus elementos asociados. Fabricado con acero S355."
             imagen_GS = "C:/Memorias y servidor/Aplicacion de Memorias/Imagenes/granshor.JPG"
+
+            # texto e imagen del Lolashor
+            texto_LS = "Sistema de puntales temporales formado por marcos de celosía compuestos por tubos diámetro 48,3x3,2mm atornillados entre sí mediante tornillos M16 de calidad 8.8. Estos marcos se arriostrarán mediante bastidores formados con el mismo material, uniendo los marcos mediante grapas fijas a los marcos de arriostramiento."
+            imagen_LS = "C:/Memorias y servidor/Aplicacion de Memorias/Imagenes/LOLASHOR.JPG"
 
             # Imagenes TDS del SuperSlim
             imagen_TDS_SS1 = "C:/Memorias y servidor/Aplicacion de Memorias/TDSs/SS/ANEJO SS-01.jpg"
@@ -807,6 +814,13 @@ class Application(tk.Frame):
             imagen_TDS_MP10 = "C:/Memorias y servidor/Aplicacion de Memorias/TDSs/Megaprop/TDS Megaprop INCYE-10.jpg"
             imagen_TDS_MP11 = "C:/Memorias y servidor/Aplicacion de Memorias/TDSs/Megaprop/TDS Megaprop INCYE-11.jpg"
 
+            # Imagenes TDS Lolashor
+            imagen_TDS_LS1 = "C:/Memorias y servidor/Aplicacion de Memorias/TDSs/Lolashor/lola1.png"
+            imagen_TDS_LS2 = "C:/Memorias y servidor/Aplicacion de Memorias/TDSs/Lolashor/lola2.png"
+            imagen_TDS_LS3 = "C:/Memorias y servidor/Aplicacion de Memorias/TDSs/Lolashor/lola3.png"
+            imagen_TDS_LS4 = "C:/Memorias y servidor/Aplicacion de Memorias/TDSs/Lolashor/lola4.png"
+
+
             # Imagen del viento y su texto correspondiente
             imagen_viento = "C:/Memorias y servidor/Estabilizadores/carga_viento.jpg"
             texto_viento= "3. CARGA VIENTO"
@@ -831,15 +845,18 @@ class Application(tk.Frame):
             added_imagen_SS = document_editor.añadir_im_SS(texto_SS, imagen_SS)
             added_imagen_MP = document_editor.añadir_im_MP(texto_MP, imagen_MP)
             added_imagen_GS = document_editor.añadir_im_GS(texto_GS, imagen_GS)
+            added_imagen_LS = document_editor.añadir_im_LS(texto_LS, imagen_LS)
             # falta el del lolashor
 
             if checkbox_values2[0]: # Superslim
                 added_imagen_TDS_SS = document_editor.añadir_TDS_SS(texto_apendice, imagen_TDS_SS1, imagen_TDS_SS2, imagen_TDS_SS3, imagen_TDS_SS4, imagen_TDS_SS5, imagen_TDS_SS6, imagen_TDS_SS7, imagen_TDS_SS8, imagen_TDS_SS9, imagen_TDS_SS10, imagen_TDS_SS11, imagen_TDS_SS12, imagen_TDS_SS13, imagen_TDS_SS14, imagen_TDS_SS15, imagen_TDS_SS16, imagen_TDS_SS17, imagen_TDS_SS18, imagen_TDS_SS19, imagen_TDS_SS20, imagen_TDS_SS21, imagen_TDS_SS22, imagen_TDS_SS23, imagen_TDS_SS24, imagen_TDS_SS25, imagen_TDS_SS26, imagen_TDS_SS27, imagen_TDS_SS28)
             if checkbox_values2[1]: # Megaprop
                 added_imagen_TDS_MP = document_editor.añadir_TDS_MP(texto_apendice, imagen_TDS_MP1, imagen_TDS_MP2, imagen_TDS_MP3, imagen_TDS_MP4, imagen_TDS_MP5, imagen_TDS_MP6, imagen_TDS_MP7, imagen_TDS_MP8, imagen_TDS_MP9, imagen_TDS_MP10, imagen_TDS_MP11)
-            if checkbox_values2[3]: # Granshor
+            if checkbox_values2[2]: # Granshor
                 added_imagen_TDS_GS = document_editor.añadir_TDS_GS(texto_apendice, imagen_TDS_GS1, imagen_TDS_GS2, imagen_TDS_GS3, imagen_TDS_GS4, imagen_TDS_GS5, imagen_TDS_GS6, imagen_TDS_GS7, imagen_TDS_GS8, imagen_TDS_GS9, imagen_TDS_GS10, imagen_TDS_GS11, imagen_TDS_GS12, imagen_TDS_GS13, imagen_TDS_GS14, imagen_TDS_GS15, imagen_TDS_GS16, imagen_TDS_GS17, imagen_TDS_GS18, imagen_TDS_GS19, imagen_TDS_GS20, imagen_TDS_GS21, imagen_TDS_GS22, imagen_TDS_GS23, imagen_TDS_GS24, imagen_TDS_GS25, imagen_TDS_GS26, imagen_TDS_GS27, imagen_TDS_GS28, imagen_TDS_GS29, imagen_TDS_GS30, imagen_TDS_GS31, imagen_TDS_GS32)
-            # falta el del lolashor 
+            if checkbox_values2[3]: # Lolashor
+                added_imagen_TDS_LS = document_editor.añadir_TDS_LS(texto_apendice, imagen_TDS_LS1, imagen_TDS_LS2, imagen_TDS_LS3, imagen_TDS_LS4)
+                        
 
             if checkbox_values[0] or checkbox_values[1] or checkbox_values[2] or checkbox_values[3]:
                 added_im_viento = document_editor.añadir_img_viento(texto_viento, imagen_viento)
@@ -851,7 +868,7 @@ class Application(tk.Frame):
             start_paragraph_index = 50
             end_paragraph_index = 65 
 
-            if added_imagen_SS or added_imagen_MP or added_imagen_GS or added_imagen_TDS_SS or added_imagen_TDS_GS or added_imagen_TDS_MP or added_im_viento or added_im_portico or added_im_contrap:
+            if added_imagen_SS or added_imagen_MP or added_imagen_GS or added_imagen_LS or added_imagen_TDS_SS or added_imagen_TDS_MP or added_imagen_TDS_GS or added_imagen_TDS_LS or added_im_viento or added_im_portico or added_im_contrap:
                 if self.output_path:
                     document_editor.remove_empty_paragraphs_between_range(start_paragraph_index, end_paragraph_index)
                     
