@@ -59,7 +59,7 @@ class DocumentEditor:
         with open(output_path, 'wb') as output_file: 
             pdf_writer.write(output_file)
 
-    # insertar planos en pdf antes del Apendice 1
+    # insertar planos en pdf antes de Comprobación de pórtico
     def in_planos(self, insert_pdf_paths, output_path):
         main_pdf = PyPDF2.PdfReader(output_path)
 
@@ -67,14 +67,44 @@ class DocumentEditor:
         for i in range(len(main_pdf.pages)):
             page = main_pdf.pages[i]
             text = page.extract_text()
-            if "3. CARGA VIENTO" in text:
+            if "4. COMPROBACIÓN PÓRTICO" in text:
+                insert_page = i - 1
+                break
+
+        pdf_writer = PyPDF2.PdfWriter()
+
+        for i in range(insert_page):
+            pdf_writer.add_page(main_pdf.pages[i])
+
+        insert_pdf_paths = list(insert_pdf_paths)
+        insert_pdf_paths.sort(key=lambda x: os.path.basename(x))
+        
+        for path in insert_pdf_paths:
+            if path.lower().endswith('.pdf'):
+                insert_pdf = PyPDF2.PdfReader(path)
+                for i in range(len(insert_pdf.pages)):
+                    pdf_writer.add_page(insert_pdf.pages[i])
+
+        for i in range(insert_page, len(main_pdf.pages)):
+            pdf_writer.add_page(main_pdf.pages[i])
+
+        with open(output_path, 'wb') as output_file:
+            pdf_writer.write(output_file)
+
+    # insertar planos en pdf antes de Comprobación de pórtico
+    def in_anclajes(self, insert_pdf_paths, output_path):
+        main_pdf = PyPDF2.PdfReader(output_path)
+
+        insert_page = None
+        for i in range(len(main_pdf.pages)):
+            page = main_pdf.pages[i]
+            text = page.extract_text()
+            if "7. CARACTERÍSTICAS GEOMÉTRICAS Y MECÁNICAS PERFILES INCYE" in text:
                 insert_page = i 
                 break
 
         pdf_writer = PyPDF2.PdfWriter()
 
-        if insert_page is None:
-            print("Insert page not found")
         for i in range(insert_page):
             pdf_writer.add_page(main_pdf.pages[i])
 
@@ -151,7 +181,7 @@ class DocumentEditor:
         if target_index != -1:
             target_paragraph = self.document.paragraphs[target_index]
             run = target_paragraph.add_run()
-            run.add_picture(imagen_contrap1, width=Inches(6.9), height=Inches(1.4))
+            run.add_picture(imagen_contrap1, width=Inches(6.9), height=Inches(1.35))
             run.add_picture(imagen_contrap2, width=Inches(6.9), height=Inches(2.2))
             run.add_picture(imagen_contrap3, width=Inches(6.9), height=Inches(2.1))
             return True 
@@ -360,6 +390,7 @@ class Application(tk.Frame):
         self.pack(fill=tk.BOTH, expand=True)
         self.create_widgets()
         self.planos_paths = ()
+        self.anclajes_paths = ()
         self.apendice_path = ()
                 # Button styling 
 
@@ -449,7 +480,7 @@ class Application(tk.Frame):
 
         # Seleccionar familia de materiales
         self.familia_frame = tk.Frame(self, bg="#F5F5F5")
-        self.familia_frame.pack(pady=7)
+        self.familia_frame.pack(pady=6)
         self.familia_label = tk.Label(self.familia_frame, text="Seleccionar materiales utilizados:", font=("Helvetica", 14), bg="#F5F5F5", fg="#333333")
         self.familia_label.pack(side=tk.LEFT, padx=7)
 
@@ -461,44 +492,49 @@ class Application(tk.Frame):
 
         # Comboboxes
         self.combobox_frame = tk.Frame(self, bg="#F5F5F5")
-        self.combobox_frame.pack(pady=7)
+        self.combobox_frame.pack(pady=6)
 
         self.label1 = ttk.Label(self.combobox_frame, text="Autor de la nota de cálculo", font=("Arial", 14))
-        self.label1.grid(column=0, row=0, padx=11, pady=11)
+        self.label1.grid(column=0, row=0, padx=11, pady=10)
         self.opcion_autor = tk.StringVar()
         opciones = ("José M. Maldonado", "David Lara.", "Ezequiel Sánchez.", "Andrés Rodríguez.", "Jorge Nebreda.", "Alberto Aldama.", "Adelaida Sáez.", "Alejandro Ángel Builes.", "Juan José Morón.", "Manuel González.", "Rafael Mansilla.")
         self.combobox_autor = ttk.Combobox(self.combobox_frame, width=20, textvariable=self.opcion_autor, values=opciones, font=("Arial", 12), style='Custom.TCombobox')
         self.combobox_autor.current(0)
-        self.combobox_autor.grid(column=0, row=1, padx=11, pady=11)
+        self.combobox_autor.grid(column=0, row=1, padx=11, pady=10)
 
         # Comboboxes button frame 
         self.label_revisor = ttk.Label(self.combobox_frame, text="Revisor de la nota de cálculo", font=("Arial", 14))
-        self.label_revisor.grid(column=0, row=2, padx=11, pady=11)
+        self.label_revisor.grid(column=0, row=2, padx=11, pady=10)
         self.opcion_revisor = tk.StringVar()
         self.combobox_revisor = ttk.Combobox(self.combobox_frame, width=20, textvariable=self.opcion_revisor, values=opciones, font=("Arial", 12), style='Custom.TCombobox')
         self.combobox_revisor.current(0)
-        self.combobox_revisor.grid(column=0, row=3, padx=11, pady=11)
+        self.combobox_revisor.grid(column=0, row=3, padx=11, pady=10)
 
 
         self.select_button = tk.Button(text="Ubicación de guardado:", command=self.select_output_path, font=("Helvetica", 16), bg="#F5F5F5", fg="black",
                                padx=17,
-                               pady=9)
+                               pady=5)
         self.select_button.pack()
 
         self.apendice_button = tk.Button(text="Seleccionar Excel Cálculos:", command=self.select_apendice, font=("Helvetica", 16), bg="#F5F5F5", fg="black",
                         padx=12,
-                        pady=4)
+                        pady=2)
         self.apendice_button.pack()
 
         self.apendice_button = tk.Button(text="Seleccionar PLANOS:", command=self.select_planos, font=("Helvetica", 16), bg="#F5F5F5", fg="black",
                         padx=12,
-                        pady=4)
+                        pady=2)
+        self.apendice_button.pack()
+
+        self.apendice_button = tk.Button(text="Seleccionar comprobación de anclajes:", command=self.select_anclajes, font=("Helvetica", 16), bg="#F5F5F5", fg="black",
+                        padx=12,
+                        pady=2)
         self.apendice_button.pack()
 
         # Modificar button bg="#3986F3"
         self.fill_button = tk.Button(text="Crear", command=self.fill_template, font=("Helvetica", 16), bg="#FF6E40", fg="white",
                                padx=70,
-                               pady=20)
+                               pady=15)
         self.fill_button.pack()
 
     def select_apendice(self):
@@ -510,6 +546,11 @@ class Application(tk.Frame):
         folder = filedialog.askopenfilenames()
         if folder:
             self.planos_paths = folder
+
+    def select_anclajes(self):
+        folder = filedialog.askopenfilenames()
+        if folder:
+            self.anclajes_paths = folder
         
     def select_output_path(self):
         codigo = self.codigo_entry.get()
@@ -655,7 +696,7 @@ class Application(tk.Frame):
         anyo = current_date.strftime("%Y") # mis primeras 
 
         # cargamos la plantilla
-        template = "C:/Memorias y servidor/Estabilizadores/XXXXXXXXX_Nota de cálculo_211213 - copia2.docx"
+        template = "C:/Memorias y servidor/Estabilizadores/XXXXXXXXX_Nota de calculo_211213 - copia2.docx"
         document = MailMerge(template)
 
         # Sustituimos valores
@@ -823,7 +864,7 @@ class Application(tk.Frame):
 
             # Imagen del viento y su texto correspondiente
             imagen_viento = "C:/Memorias y servidor/Estabilizadores/carga_viento.jpg"
-            texto_viento= "3. CARGA VIENTO"
+            texto_viento= "3. CARGA DEL VIENTO"
 
             # Imagen del pórtico y su texto correspondiente
             imagen_portico1 = "C:/Memorias y servidor/Estabilizadores/portico1.jpg"
@@ -875,6 +916,7 @@ class Application(tk.Frame):
                     document_editor.save_document(self.output_path)
                     pdf_path = os.path.splitext(self.output_path)[0] + ".pdf"
                     document_editor.in_planos(self.planos_paths, pdf_path) 
+                    document_editor.in_anclajes(self.anclajes_paths, pdf_path)
                     #pdf_output_path = self.output_path.replace(".docx", ".pdf") 
                     #convert(self.output_path, pdf_output_path)
             else:
