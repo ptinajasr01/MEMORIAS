@@ -1020,7 +1020,7 @@ class Application(tk.Frame):
             imagen_MP = "C:/Memorias y servidor/Aplicacion de Memorias/Imagenes/megaprop.JPG"
             
             # texto e imágenes del Granshor
-            texto_GS = "El sistema Granshor (área sección 72,59 cm2/cordón x 2 cordones) es un sistema de de celosías modular y sus elementos asociados. Fabricado con acero S355."
+            texto_GS = "El sistema Granshor (área sección 72,59 cm2/cordón x 2 cordones) es un sistema de celosías modular y sus elementos asociados. Fabricado con acero S355."
             imagen_GS = "C:/Memorias y servidor/Aplicacion de Memorias/Imagenes/granshor.JPG"
             
             # textos e imágenes del TC
