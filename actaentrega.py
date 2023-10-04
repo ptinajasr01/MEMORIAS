@@ -180,7 +180,7 @@ class Application(tk.Frame):
         additional_info = {
         "JoseManuelMaldonadoM": "José M. Maldonado",
         "DavidLara": "David Lara",
-        "EzequielSanchezdelaG": "Ezequiel Sánchez",
+        "EzequielSanchezdelaG": "Ezequiel Sánchez De La Guía",
         "": "Andrés Rodríguez Pérez",
         "AlbertoAldamaMartine": "Alberto Aldama Martínez",
         "": "Adelaida Sáez Castejón",
@@ -252,7 +252,7 @@ class Application(tk.Frame):
         mail.To = email_cliente
         mail.Subject = f"{codigo} {nombre_obra} -- ACTA DE ENTREGA INCYE" 
         mail.CC = email_delegado
-        mail.Body = "Estimado cliente, \n\nTras la finalización del montaje, adjunto Acta de entrega de la instalación. \n\nUn cordial saludo."
+        mail.Body = f"Estimado cliente. \n\nTras la finalización del montaje, adjunto Acta de entrega de la instalación. \n\nUn cordial saludo. \n\n{tecnico} - Dpto. de Ingeniería INCYE "
         mail.Attachments.Add(pdf_path) 
 
         mail.Display()
