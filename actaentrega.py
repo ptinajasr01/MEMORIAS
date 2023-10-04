@@ -207,6 +207,19 @@ class Application(tk.Frame):
         "PabloTinajas": "Máster Ingeniero de Caminos, CC. y PP."
         }
 
+        additional_info8 = {
+        "AVS": "antonio.vazquez@incye.com",
+        "CENT": "madrid@incye.com",
+        "BCN": "barcelona@incye.com",
+        "BLB": "bilbao@incye.com",
+        "EXP": "antonio.vazquez@incye.com",
+        "FRA": "leyla.bentahar@incye.com",
+        "LEV": "valencia@incye.com",
+        "PT": "",
+        "AND": "malaga@incye.com"
+        }
+
+        email_delegado = additional_info8.get(delegado, "")
         tecnico = additional_info.get(username, "")
         titulacion = additional_info2.get(username, "")
 
@@ -237,8 +250,9 @@ class Application(tk.Frame):
         mail = outlook.CreateItem(0)
 
         mail.To = email_cliente
-        mail.Subject = f"Acta de entrega INCYE de la obra {nombre_obra} - {nombre_cliente}" 
-        mail.Body = "Se adjunta el acta de entrega en nombre del departamento técnico de INCYE"
+        mail.Subject = f"{codigo} {nombre_obra} -- ACTA DE ENTREGA INCYE" 
+        mail.CC = email_delegado
+        mail.Body = "Estimado cliente, \n\nTras la finalización del montaje, adjunto Acta de entrega de la instalación. \n\nUn cordial saludo."
         mail.Attachments.Add(pdf_path) 
 
         mail.Display()

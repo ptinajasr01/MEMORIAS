@@ -291,9 +291,9 @@ class Application(tk.Frame):
         mail = outlook.CreateItem(0)
 
         mail.To = email_cliente
-        mail.Subject = f"{codigo} {nombre_obra} CARTA DE INTERLOCUTORES" 
+        mail.Subject = f"{codigo} {nombre_obra} -- CARTA DE INTERLOCUTORES INCYE" 
         mail.CC = email_delegado
-        mail.Body = "Estimado cliente, \nadjunto Carta de interlocutores con los datos de contacto del personal de INCYE relacionado con la obra. \nUn cordial saludo."
+        mail.Body = "Estimado cliente, \n\nadjunto Carta de interlocutores con los datos de contacto del personal de INCYE relacionado con la obra. \n\nUn cordial saludo."
         mail.Attachments.Add(pdf_path) 
 
         mail.Display()
