@@ -16,6 +16,7 @@ import PyPDF2
 import getpass
 import openpyxl
 import win32com.client
+from docx.shared import Pt
 username = getpass.getuser()
 
 
@@ -43,7 +44,7 @@ class Application(tk.Frame):
         super().__init__(master)
         self.master = master
         self.master.title("Carta de interlocutores")
-        self.master.geometry("430x350")
+        self.master.geometry("730x650")
         self.master.configure(background="#F5F5F5")
         self.pack(fill=tk.BOTH, expand=True)
         self.create_widgets()
@@ -104,9 +105,17 @@ class Application(tk.Frame):
         self.combobox_revisor.current(0)
         self.combobox_revisor.grid(column=0, row=3, padx=11, pady=11)
 
+        # Nota adicional
+        self.not_frame = tk.Frame(self, bg="#F5F5F5")
+        self.not_frame.pack(pady=15)
+        self.not_label = tk.Label(self.not_frame, text="Nota adicional:", font=("Helvetica", 14), bg="#F5F5F5", fg="#333333")
+        self.not_label.pack(side=tk.LEFT, padx=15)
+        self.not_entry = tk.Entry(self.not_frame, font=("Helvetica", 14))
+        self.not_entry.pack(side=tk.RIGHT, padx=15, expand=True, fill=tk.X)
+
 
         # Modificar button bg="#3986F3"
-        self.fill_button = tk.Button(text="Generar", command=self.fill_template, font=("Helvetica", 16), bg="#990000", fg="white",
+        self.fill_button = tk.Button(text="Generar", command=self.fill_template, font=("Helvetica", 16), bg="#2F4F4F", fg="white",
                                padx=50,
                                pady=13)
         self.fill_button.pack()
@@ -119,7 +128,18 @@ class Application(tk.Frame):
         lciudad = codigo[-1]  # Extract the city code from the work code
         jefe = self.combobox_autor.get()
         nota = self.combobox_revisor.get()
-        nc = "Nota de cálculo y"
+        
+        if self.not_entry.get() != "":
+            nota_ad = self.not_entry.get()
+            m = "Nota:"
+        if self.not_entry.get() == "":
+            nota_ad = ""
+            m = ""
+    
+        if nota == "Sí":
+            nc = "Nota de cálculo,"
+        if nota == "No":
+            nc= ""
 
         if lciudad == "M":
             ciudad = "MAD"
@@ -206,9 +226,9 @@ class Application(tk.Frame):
         document = MailMerge(template)
 
         # Sustituimos valores
-        document.merge(Nombre_Contacto = contacto_cliente, Nombre_Cliente=nombre_cliente, Nombre_Obra=nombre_obra, Fecha=formatted_date, Delegado=delegado1, Tel_Delegado=tel_delegado, Tecnico=tecnico, Tel_Tecnico=tel_tecnico, Jefe=jefe, Tel_Jefe=tel_jefe, Encargado_Prod=encargado_prod, Tel_Prod=tel_prod)
+        document.merge(Nombre_Obra=nombre_obra, Estructura = estructura, Codigo = codigo, Fecha=formatted_date, Nombre_Cliente=nombre_cliente, NC=nc, Tecnico=tecnico, Jefe=jefe, Titulacion=titulacion, M=m, Nota_Ad = nota_ad)
         
-        output_path = f'C:\\Users\\{username}\\Incye\\Proyectos - Documentos\\{ciudad}\\{codigo}\\09 Comunicados\\3_Docs\\{codigo}_CI.docx'
+        output_path = f'C:\\Users\\{username}\\Incye\\Proyectos - Documentos\\{ciudad}\\{codigo}\\07 Produccion\\{codigo}_ActaDeEntrega.docx'
         document.write(output_path)
         pdf_path = output_path.replace(".docx", ".pdf")
         docx2pdf.convert(output_path, pdf_path)
@@ -217,8 +237,8 @@ class Application(tk.Frame):
         mail = outlook.CreateItem(0)
 
         mail.To = email_cliente
-        mail.Subject = f"Carta de interlocutores INCYE - {nombre_cliente}" 
-        mail.Body = "Se adjunta la carta de interlocutores en nombre del departamento técnico de INCYE"
+        mail.Subject = f"Acta de entrega INCYE de la obra {nombre_obra} - {nombre_cliente}" 
+        mail.Body = "Se adjunta el acta de entrega en nombre del departamento técnico de INCYE"
         mail.Attachments.Add(pdf_path) 
 
         mail.Display()
