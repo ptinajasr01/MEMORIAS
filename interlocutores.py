@@ -227,6 +227,18 @@ class Application(tk.Frame):
         "AND": "623 491 208"
         }    
 
+        additional_info8 = {
+        "AVS": "antonio.vazquez@incye.com",
+        "CENT": "madrid@incye.com",
+        "BCN": "barcelona@incye.com",
+        "BLB": "bilbao@incye.com",
+        "EXP": "antonio.vazquez@incye.com",
+        "FRA": "leyla.bentahar@incye.com",
+        "LEV": "valencia@incye.com",
+        "PT": "",
+        "AND": "malaga@incye.com"
+        }  
+
 
         additional_info7 = {
         "Alejandro Elías": "676 554 345",
@@ -252,6 +264,7 @@ class Application(tk.Frame):
         delegado1 = additional_info5.get(delegado, "")
         tel_delegado = additional_info6.get(delegado, "")
         tel_jefe = additional_info7.get(jefe, "")
+        email_delegado = additional_info8.get(delegado, "")
 
         # Fechas
         current_date = datetime.datetime.now()
@@ -278,8 +291,9 @@ class Application(tk.Frame):
         mail = outlook.CreateItem(0)
 
         mail.To = email_cliente
-        mail.Subject = f"Carta de interlocutores INCYE - {nombre_cliente}" 
-        mail.Body = "Se adjunta la carta de interlocutores en nombre del departamento técnico de INCYE"
+        mail.Subject = f"{codigo} {nombre_obra} CARTA DE INTERLOCUTORES" 
+        mail.CC = email_delegado
+        mail.Body = "Estimado cliente, \nadjunto Carta de interlocutores con los datos de contacto del personal de INCYE relacionado con la obra. \nUn cordial saludo."
         mail.Attachments.Add(pdf_path) 
 
         mail.Display()
