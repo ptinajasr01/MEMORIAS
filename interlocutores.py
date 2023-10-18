@@ -278,6 +278,7 @@ class Application(tk.Frame):
         # Fechas
         current_date = datetime.datetime.now()
         formatted_date = current_date.strftime("%d/%m/%Y")
+        custom_date_format = current_date.strftime("%y%m%d")
 
         # Obtener los valores de las checkboxes
         checkbox_values = list(self.checkbar.state())
@@ -291,7 +292,7 @@ class Application(tk.Frame):
         # Sustituimos valores
         document.merge(Nombre_Contacto = contacto_cliente, Nombre_Cliente=nombre_cliente, Nombre_Obra=nombre_obra, Fecha=formatted_date, Delegado=delegado1, Tel_Delegado=tel_delegado, Tecnico=tecnico, Tel_Tecnico=tel_tecnico, Jefe=jefe, Tel_Jefe=tel_jefe, Encargado_Prod=encargado_prod, Tel_Prod=tel_prod)
         
-        output_path = f'C:\\Users\\{username}\\Incye\\Proyectos - Documentos\\{ciudad}\\{codigo}\\09 Comunicados\\3_Docs\\{codigo}_CI.docx'
+        output_path = f'C:\\Users\\{username}\\Incye\\Proyectos - Documentos\\{ciudad}\\{codigo}\\09 Comunicados\\3_Docs\\{codigo}_CI_{custom_date_format}.docx'
         document.write(output_path)
         pdf_path = output_path.replace(".docx", ".pdf")
         docx2pdf.convert(output_path, pdf_path)
@@ -300,7 +301,7 @@ class Application(tk.Frame):
         mail = outlook.CreateItem(0)
 
         mail.To = email_cliente
-        mail.Subject = f"{codigo} {nombre_obra} -- CARTA DE INTERLOCUTORES INCYE" 
+        mail.Subject = f"{codigo} {nombre_obra} -- CARTA DE INTERLOCUTORES INCYE - {formatted_date}" 
         mail.CC = email_delegado
         mail.Body = f"Estimado cliente. \n\nAdjunto Carta de interlocutores con los datos de contacto del personal de INCYE relacionado con la obra. \n\nUn cordial saludo. \n\n{tecnico} - Dpto. de Ingeniería INCYE "
         mail.Attachments.Add(pdf_path) 

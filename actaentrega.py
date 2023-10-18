@@ -114,12 +114,12 @@ class Application(tk.Frame):
         self.not_entry.pack(side=tk.RIGHT, padx=15, expand=True, fill=tk.X)
 
         # Fecha inspección final:
-        self.fecha2_frame = tk.Frame(self, bg="#F5F5F5")
-        self.fecha2_frame.pack(pady=15)
-        self.fecha2_label = tk.Label(self.fecha2_frame, text="Fecha de inspección final:", font=("Helvetica", 14), bg="#F5F5F5", fg="#333333")
-        self.fecha2_label.pack(side=tk.LEFT, padx=15)
-        self.fecha2_entry = tk.Entry(self.fecha2_frame, font=("Helvetica", 14))
-        self.fecha2_entry.pack(side=tk.RIGHT, padx=15, expand=True, fill=tk.X)
+        self.fech_frame = tk.Frame(self, bg="#F5F5F5")
+        self.fech_frame.pack(pady=15)
+        self.fech_label = tk.Label(self.fech_frame, text="Fecha de inspección final:", font=("Helvetica", 14), bg="#F5F5F5", fg="#333333")
+        self.fech_label.pack(side=tk.LEFT, padx=15)
+        self.fech_entry = tk.Entry(self.fech_frame, font=("Helvetica", 14))
+        self.fech_entry.pack(side=tk.RIGHT, padx=15, expand=True, fill=tk.X)
 
 
         # Modificar button bg="#3986F3"
@@ -136,7 +136,7 @@ class Application(tk.Frame):
         lciudad = codigo[-1]  # Extract the city code from the work code
         jefe = self.combobox_autor.get()
         nota = self.combobox_revisor.get()
-        fecha2 = self.fecha2_frame.get()
+        fecha2 = self.fech_entry.get()
         
         if self.not_entry.get() != "":
             nota_ad = self.not_entry.get()
@@ -238,6 +238,7 @@ class Application(tk.Frame):
         # Fechas
         current_date = datetime.datetime.now()
         formatted_date = current_date.strftime("%d/%m/%Y")
+        custom_date_format = current_date.strftime("%y%m%d")
 
         # Obtener los valores de las checkboxes
         checkbox_values = list(self.checkbar.state())
@@ -253,7 +254,7 @@ class Application(tk.Frame):
         # Sustituimos valores
         document.merge(Nombre_Obra=nombre_obra, Estructura = estructura, Codigo = codigo, Fecha=formatted_date, Nombre_Cliente=nombre_cliente, NC=nc, Fecha2=fecha2, Tecnico=tecnico, Jefe=jefe, Titulacion=titulacion, M=m, Nota_Ad = nota_ad)
         
-        output_path = f'C:\\Users\\{username}\\Incye\\Proyectos - Documentos\\{ciudad}\\{codigo}\\07 Produccion\\{codigo}_ActaDeEntrega.docx'
+        output_path = f'C:\\Users\\{username}\\Incye\\Proyectos - Documentos\\{ciudad}\\{codigo}\\07 Produccion\\{codigo}_ActaDeEntrega.docx_{custom_date_format}'
         document.write(output_path)
         pdf_path = output_path.replace(".docx", ".pdf")
         docx2pdf.convert(output_path, pdf_path)
@@ -262,7 +263,7 @@ class Application(tk.Frame):
         mail = outlook.CreateItem(0)
 
         mail.To = email_cliente
-        mail.Subject = f"{codigo} {nombre_obra} -- ACTA DE ENTREGA INCYE" 
+        mail.Subject = f"{codigo} - {nombre_obra} -- ACTA DE ENTREGA INCYE -- {formatted_date}" 
         mail.CC = email_delegado
         mail.Body = f"Estimado cliente. \n\nTras la finalización del montaje, adjunto Acta de entrega de la instalación. \n\nUn cordial saludo. \n\n{tecnico} - Dpto. de Ingeniería INCYE "
         mail.Attachments.Add(pdf_path) 
