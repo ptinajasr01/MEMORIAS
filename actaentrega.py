@@ -113,6 +113,14 @@ class Application(tk.Frame):
         self.not_entry = tk.Entry(self.not_frame, font=("Helvetica", 14))
         self.not_entry.pack(side=tk.RIGHT, padx=15, expand=True, fill=tk.X)
 
+        # Fecha inspección final:
+        self.fecha2_frame = tk.Frame(self, bg="#F5F5F5")
+        self.fecha2_frame.pack(pady=15)
+        self.fecha2_label = tk.Label(self.fecha2_frame, text="Fecha de inspección final:", font=("Helvetica", 14), bg="#F5F5F5", fg="#333333")
+        self.fecha2_label.pack(side=tk.LEFT, padx=15)
+        self.fecha2_entry = tk.Entry(self.fecha2_frame, font=("Helvetica", 14))
+        self.fecha2_entry.pack(side=tk.RIGHT, padx=15, expand=True, fill=tk.X)
+
 
         # Modificar button bg="#3986F3"
         self.fill_button = tk.Button(text="Generar", command=self.fill_template, font=("Helvetica", 16), bg="#2F4F4F", fg="white",
@@ -128,6 +136,7 @@ class Application(tk.Frame):
         lciudad = codigo[-1]  # Extract the city code from the work code
         jefe = self.combobox_autor.get()
         nota = self.combobox_revisor.get()
+        fecha2 = self.fecha2_frame.get()
         
         if self.not_entry.get() != "":
             nota_ad = self.not_entry.get()
@@ -242,7 +251,7 @@ class Application(tk.Frame):
         document = MailMerge(template)
 
         # Sustituimos valores
-        document.merge(Nombre_Obra=nombre_obra, Estructura = estructura, Codigo = codigo, Fecha=formatted_date, Nombre_Cliente=nombre_cliente, NC=nc, Tecnico=tecnico, Jefe=jefe, Titulacion=titulacion, M=m, Nota_Ad = nota_ad)
+        document.merge(Nombre_Obra=nombre_obra, Estructura = estructura, Codigo = codigo, Fecha=formatted_date, Nombre_Cliente=nombre_cliente, NC=nc, Fecha2=fecha2, Tecnico=tecnico, Jefe=jefe, Titulacion=titulacion, M=m, Nota_Ad = nota_ad)
         
         output_path = f'C:\\Users\\{username}\\Incye\\Proyectos - Documentos\\{ciudad}\\{codigo}\\07 Produccion\\{codigo}_ActaDeEntrega.docx'
         document.write(output_path)
