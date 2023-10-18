@@ -9,45 +9,48 @@ import getpass
 username = getpass.getuser()
 
 
-def insert_images(pdf_path, images, output_path):
-    existing_pdf = PdfReader(pdf_path)
-    output = PdfWriter()
+import PyPDF2
 
-    for page_num in range(len(existing_pdf.pages)):
-        page = existing_pdf.pages[page_num]
+def insert_image(pdf_in, img, pdf_out):
 
-        packet = io.BytesIO()
-        can = canvas.Canvas(packet, pagesize=letter)
+  pdf_reader = PdfReader(pdf_in)
+  pdf_writer = PdfWriter()
 
-        if page_num % 2 == 0:
-            can.drawImage(ImageReader(images[0]), 100, 700, width=200, height=100)  # Adjust the position as needed
-        else:
-            can.drawImage(ImageReader(images[1]), 100, 100, width=200, height=100)  # Adjust the position as needed
+  for page_num in range(len(pdf_reader.pages)):
 
-        can.save()
+    pdf_page = pdf_reader.pages[page_num]
+    packet = io.BytesIO()
+    can = canvas.Canvas(packet, pagesize=letter)
 
-        # Move to the beginning of the buffer
-        packet.seek(0)
-        new_pdf = PdfReader(packet)
-        for new_page in new_pdf.pages:
-            output.add_page(new_page)
+    # Draw the existing page content first 
+    can.saveState() 
+    can.translate(0,0)
+    can.drawImage(pdf_page, 0, 300)
+    can.restoreState()
 
-    with open(output_path, "wb") as out:
-        output.write(out)
+    # Draw the new image on top
+    can.drawImage(img, 200, 200)  
 
+    can.save()
+
+    packet.seek(0)  
+    new_pdf = PdfReader(packet)  
+    pdf_writer.add_page(new_pdf.pages[0])
+
+  with open(pdf_out, "wb") as f:
+    pdf_writer.write(f)
 
 def main():
     root = Tk()
     root.withdraw()
     pdf_path = filedialog.askopenfilename()
-    images = [
-        f"C:\\Users\\{username}\\Incye\\Ingenieria - Documentos\\12_Aplicaciones\\BeamMod\\incyelogo.jpg",
-        f"C:\\Users\\{username}\\Incye\\Ingenieria - Documentos\\12_Aplicaciones\\BeamMod\\imagen (2).png",
-    ]  # Absolute paths of the images
+    image1 = f"C:\\Users\\{username}\\Incye\\Ingenieria - Documentos\\12_Aplicaciones\\BeamMod\\incyelogo.jpg"
+    image2 = f"C:\\Users\\{username}\\Incye\\Ingenieria - Documentos\\12_Aplicaciones\\BeamMod\\imagen (2).png"
+      # Absolute paths of the images
 
     output_path = pdf_path.split(".pdf")[0] + "_edited.pdf"
 
-    insert_images(pdf_path, images, output_path)
+    insert_image(pdf_path, image1, output_path)
     print(f"New PDF generated at {output_path}")
     
 if __name__ == "__main__":
