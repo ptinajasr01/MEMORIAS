@@ -153,7 +153,7 @@ class Application(tk.Frame):
         "JoseManuelMaldonadoM": "José M. Maldonado",
         "DavidLara": "David Lara",
         "EzequielSanchezdelaG": "Ezequiel Sánchez De La Guía",
-        "": "Andrés Rodríguez Pérez",
+        "AndresRodriguezPerez": "Andrés Rodríguez Pérez",
         "AlbertoAldamaMartine": "Alberto Aldama Martínez",
         "AdelaidaSaez": "Adelaida Sáez Castejón",
         "AlejandroBuiles": "Alejandro Ángel Builes",
@@ -168,7 +168,7 @@ class Application(tk.Frame):
         "JoseManuelMaldonadoM": "624 563 882",
         "DavidLara": "624 296 118",
         "EzequielSanchezdelaG": "627 177 912",
-        "": "627 172 908",
+        "AndresRodriguezPerez": "627 172 908",
         "AlbertoAldamaMartine": "627 172 717",
         "AdelaidaSáez": "624 454 082",
         "AlejandroBuiles": "+573126286401",
@@ -207,6 +207,9 @@ class Application(tk.Frame):
         "AVS": "Antonio Vázquez Sánchez",
         "CENT": "Ignacio Merlín López",
         "BCN": "David Suárez",
+        "ASP": "Ana Seoane", 
+        "CRN": "Ana Seoane",
+        "SPG": "Sandra Pereira",
         "BLB": "Ibai Marlasca",
         "EXP": "Antonio Vázquez Sánchez",
         "FRA": "Leyla",
@@ -220,6 +223,9 @@ class Application(tk.Frame):
         "CENT": "615 201 952",
         "BCN": "627 197 582",
         "BLB": "623 255 811",
+        "ASP": "627 172 877", 
+        "CRN": "627 172 877",
+        "SPG": "609 619 848",        
         "EXP": "",
         "FRA": "",
         "LEV": "611 069 601",
@@ -232,6 +238,9 @@ class Application(tk.Frame):
         "CENT": "madrid@incye.com",
         "BCN": "barcelona@incye.com",
         "BLB": "bilbao@incye.com",
+        "ASP": "ana.seoane@incye.com", 
+        "CRN": "ana.seoane@incye.com",
+        "SPG": "galicia@incye.com",  
         "EXP": "antonio.vazquez@incye.com",
         "FRA": "leyla.bentahar@incye.com",
         "LEV": "valencia@incye.com",
@@ -273,9 +282,9 @@ class Application(tk.Frame):
         # Obtener los valores de las checkboxes
         checkbox_values = list(self.checkbar.state())
         if checkbox_values[0]:
-            template = f"C:\\Users\\{username}\\Incye\\Ingenieria - 12_Aplicaciones\\interlocutores\\ci_montaje.docx"
+            template = f"C:\\Users\\{username}\\Incye\\Ingenieria - Documentos\\12_Aplicaciones\\interlocutores\\ci_montaje.docx"
         if checkbox_values[1]:
-            template = f"C:\\Users\\{username}\\Incye\\Ingenieria - 12_Aplicaciones\\interlocutores\\ci_sinmontaje.docx"
+            template = f"C:\\Users\\{username}\\Incye\\Ingenieria - Documentos\\12_Aplicaciones\\interlocutores\\ci_sinmontaje.docx"
 
         document = MailMerge(template)
 

@@ -41,15 +41,14 @@ def main():
     root.withdraw()
     pdf_path = filedialog.askopenfilename()
     images = [
-        f"C:\\Users\\{username}\\Incye\\Ingenieria - 12_Aplicaciones\\BeamMod\\incyelogo.jpg",
-        f"C:\\Users\\{username}\\Incye\\Ingenieria - 12_Aplicaciones\\BeamMod\\imagen (2).png",
+        f"C:\\Users\\{username}\\Incye\\Ingenieria - Documentos\\12_Aplicaciones\\BeamMod\\incyelogo.jpg",
+        f"C:\\Users\\{username}\\Incye\\Ingenieria - Documentos\\12_Aplicaciones\\BeamMod\\imagen (2).png",
     ]  # Absolute paths of the images
 
     output_path = pdf_path.split(".pdf")[0] + "_edited.pdf"
 
     insert_images(pdf_path, images, output_path)
     print(f"New PDF generated at {output_path}")
-
-
+    
 if __name__ == "__main__":
     main()

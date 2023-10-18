@@ -181,7 +181,7 @@ class Application(tk.Frame):
         "JoseManuelMaldonadoM": "José M. Maldonado",
         "DavidLara": "David Lara",
         "EzequielSanchezdelaG": "Ezequiel Sánchez De La Guía",
-        "": "Andrés Rodríguez Pérez",
+        "AndresRodriguezPerez": "Andrés Rodríguez Pérez",
         "AlbertoAldamaMartine": "Alberto Aldama Martínez",
         "AdelaidaSaez": "Adelaida Sáez Castejón",
         "AlejandroBuiles": "Alejandro Ángel Builes",
@@ -196,7 +196,7 @@ class Application(tk.Frame):
         "JoseManuelMaldonadoM": "Máster Ingeniero de Caminos, CC. y PP.",
         "DavidLara": "Máster Ingeniero de Caminos, CC. y PP.",
         "EzequielSanchezdelaG": "Ingeniero Industrial.",
-        "": "Ingeniero Téc. Industrial",
+        "AndresRodriguezPerez": "Ingeniero Téc. Industrial",
         "AlbertoAldamaMartine": "Ingeniero Industrial.",
         "AdelaidaSáez": "Ing Téc. Industrial",
         "AlejandroBuiles": "Ingeniero Civil.",
@@ -212,6 +212,9 @@ class Application(tk.Frame):
         "CENT": "madrid@incye.com",
         "BCN": "barcelona@incye.com",
         "BLB": "bilbao@incye.com",
+        "ASP": "ana.seoane@incye.com", 
+        "CRN": "ana.seoane@incye.com",
+        "SPG": "galicia@incye.com",  
         "EXP": "antonio.vazquez@incye.com",
         "FRA": "leyla.bentahar@incye.com",
         "LEV": "valencia@incye.com",
@@ -230,11 +233,11 @@ class Application(tk.Frame):
         # Obtener los valores de las checkboxes
         checkbox_values = list(self.checkbar.state())
         if checkbox_values[0]:
-            template = f"C:\\Users\\{username}\\Incye\\Ingenieria - 12_Aplicaciones\\acta entrega\\ACTA ENTREGA ACODALAMIENTOS.docx"
+            template = f"C:\\Users\\{username}\\Incye\\Ingenieria - Documentos\\12_Aplicaciones\\acta entrega\\ACTA ENTREGA ACODALAMIENTOS.docx"
         if checkbox_values[1]:
-            template = f"C:\\Users\\{username}\\Incye\\Ingenieria - 12_Aplicaciones\\acta entrega\\ACTA ENTREGA APEO-APUNTALAMIENTO.docx"
+            template = f"C:\\Users\\{username}\\Incye\\Ingenieria - Documentos\\12_Aplicaciones\\acta entrega\\ACTA ENTREGA APEO-APUNTALAMIENTO.docx"
         if checkbox_values[2]:
-            template = f"C:\\Users\\{username}\\Incye\\Ingenieria - 12_Aplicaciones\\acta entrega\\ACTA ENTREGA ESTABILIZADORES.docx"
+            template = f"C:\\Users\\{username}\\Incye\\Ingenieria - Documentos\\12_Aplicaciones\\acta entrega\\ACTA ENTREGA ESTABILIZADORES.docx"
 
         document = MailMerge(template)
 
