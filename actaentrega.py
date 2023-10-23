@@ -254,7 +254,7 @@ class Application(tk.Frame):
         # Sustituimos valores
         document.merge(Nombre_Obra=nombre_obra, Estructura = estructura, Codigo = codigo, Fecha=formatted_date, Nombre_Cliente=nombre_cliente, NC=nc, Fecha2=fecha2, Tecnico=tecnico, Jefe=jefe, Titulacion=titulacion, M=m, Nota_Ad = nota_ad)
         
-        output_path = f'C:\\Users\\{username}\\Incye\\Proyectos - Documentos\\{ciudad}\\{codigo}\\07 Produccion\\{codigo}_ActaDeEntrega.docx_{custom_date_format}'
+        output_path = f'C:\\Users\\{username}\\Incye\\Proyectos - Documentos\\{ciudad}\\{codigo}\\07 Produccion\\{codigo}_ActaDeEntrega_{custom_date_format}.docx'
         document.write(output_path)
         pdf_path = output_path.replace(".docx", ".pdf")
         docx2pdf.convert(output_path, pdf_path)
