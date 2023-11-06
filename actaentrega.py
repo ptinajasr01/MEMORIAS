@@ -223,6 +223,7 @@ class Application(tk.Frame):
         "BLB": "bilbao@incye.com",
         "ASP": "ana.seoane@incye.com", 
         "CRN": "ana.seoane@incye.com",
+        "GAL": "ana.seoane@incye.com",
         "SPG": "galicia@incye.com",  
         "EXP": "antonio.vazquez@incye.com",
         "FRA": "leyla.bentahar@incye.com",
