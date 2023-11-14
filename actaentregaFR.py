@@ -168,10 +168,10 @@ class Application(tk.Frame):
             ciudad = "SEV"
         
 
-        workbook = openpyxl.load_workbook(f'C:\\Users\\{username}\\Incye\\Proyectos - Documentos\\{ciudad}\\{codigo}\\01 Info\\{codigo}.xlsm')
+        workbook = openpyxl.load_workbook(f'C:\\Users\\{username}\\Incye\\France - Projets\\{codigo}\\01 Info\\{codigo}.xlsm')
 
         # Select the "DATOS" sheet
-        worksheet = workbook['DATOS']
+        worksheet = workbook['DONÉES']
 
         # Extract data from specific cells and store them in variables
         delegado = worksheet['C7'].value
@@ -225,7 +225,7 @@ class Application(tk.Frame):
         "CRN": "ana.seoane@incye.com",
         "SPG": "galicia@incye.com",  
         "EXP": "antonio.vazquez@incye.com",
-        "FRA": "leyla.bentahar@incye.com",
+        "FR": "xavier.marty@incye.com",
         "LEV": "valencia@incye.com",
         "PT": "",
         "AND": "malaga@incye.com"
@@ -254,7 +254,7 @@ class Application(tk.Frame):
         # Sustituimos valores
         document.merge(Nombre_Obra=nombre_obra, Estructura = estructura, Codigo = codigo, Fecha=formatted_date, Nombre_Cliente=nombre_cliente, NC=nc, Fecha2=fecha2, Tecnico=tecnico, Jefe=jefe, Titulacion=titulacion, M=m, Nota_Ad = nota_ad)
         
-        output_path = f'C:\\Users\\{username}\\Incye\\Proyectos - Documentos\\{ciudad}\\{codigo}\\07 Produccion\\{codigo}_ActaDeEntrega_{custom_date_format}.docx'
+        output_path = f'C:\\Users\\{username}\\Incye\\France - Projets\\{codigo}\\07 Production\\{codigo}_ActaDeEntrega_{custom_date_format}.docx'
         document.write(output_path)
         pdf_path = output_path.replace(".docx", ".pdf")
         docx2pdf.convert(output_path, pdf_path)
