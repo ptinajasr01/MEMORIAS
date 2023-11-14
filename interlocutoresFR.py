@@ -110,31 +110,14 @@ class Application(tk.Frame):
 ###################### idea para sacar todos los datos necesarios del excel ###################################################################
         username = self.get_username() 
         codigo = self.codigo_entry.get()
-        lciudad = codigo[-1]  # Extract the city code from the work code
+        ciudad = codigo[-2]  # Extract the city code from the work code
         jefe = self.combobox_autor.get()
-
-        if lciudad == "M":
-            ciudad = "MAD"
-        if lciudad == "T":
-            ciudad = "BCN"
-        if lciudad == "N":
-            ciudad = "BLB"
-        if lciudad == "F":
-            ciudad = "CRN"
-        if lciudad == "E":
-            ciudad = "EXP"
-        if lciudad == "V":
-            ciudad = "LEV"
-        if lciudad == "P":
-            ciudad = "PT"
-        if lciudad == "X":
-            ciudad = "SEV"
         
 
-        workbook = openpyxl.load_workbook(f'C:\\Users\\{username}\\Incye\\Proyectos - Documentos\\{ciudad}\\{codigo}\\01 Info\\{codigo}.xlsm')
+        workbook = openpyxl.load_workbook(f'C:\\Users\\{username}\\Incye\\France - Projets\\{codigo}\\01 Info\\{codigo}.xlsm')
 
         # Select the "DATOS" sheet
-        worksheet = workbook['DATOS']
+        worksheet = workbook['DONÉES']
 
         # Extract data from specific cells and store them in variables
         delegado = worksheet['C7'].value
@@ -185,7 +168,7 @@ class Application(tk.Frame):
         "BLB": "Luis Ismael",
         "CRN": "Alejandro/Luis Ismael",
         "EXP": "Luis Ismael",
-        "FRA": "Leyla",
+        "FR": "Marty",
         "LEV": "Julián",
         "PT": "Julián",
         "SEV": "Alejandro"
@@ -197,7 +180,7 @@ class Application(tk.Frame):
         "BLB": "624 402 367",
         "CRN": "676 554 345/624 402 367",
         "EXP": "624 402 367",
-        "FRA": "Leyla",
+        "FR": "Leyla",
         "LEV": "636 972 592",
         "PT": "636 972 592",
         "SEV": "676 554 345"
@@ -212,7 +195,7 @@ class Application(tk.Frame):
         "SPG": "Sandra Pereira",
         "BLB": "Ibai Marlasca",
         "EXP": "Antonio Vázquez Sánchez",
-        "FRA": "Leyla",
+        "XM": "Xavier Marty",
         "LEV": "Ismael Pérez",
         "PT": "",
         "AND": "Javier Álvarez"
@@ -227,7 +210,7 @@ class Application(tk.Frame):
         "CRN": "627 172 877",
         "SPG": "609 619 848",        
         "EXP": "",
-        "FRA": "",
+        "XM": "07 64 89 28 27",
         "LEV": "611 069 601",
         "PT": "",
         "AND": "623 491 208"
@@ -242,7 +225,7 @@ class Application(tk.Frame):
         "CRN": "ana.seoane@incye.com",
         "SPG": "galicia@incye.com",  
         "EXP": "antonio.vazquez@incye.com",
-        "FRA": "leyla.bentahar@incye.com",
+        "FRA": "xavier.marty@incye.com",
         "LEV": "valencia@incye.com",
         "PT": "",
         "AND": "malaga@incye.com"
@@ -292,7 +275,8 @@ class Application(tk.Frame):
         # Sustituimos valores
         document.merge(Nombre_Contacto = contacto_cliente, Nombre_Cliente=nombre_cliente, Nombre_Obra=nombre_obra, Fecha=formatted_date, Delegado=delegado1, Tel_Delegado=tel_delegado, Tecnico=tecnico, Tel_Tecnico=tel_tecnico, Jefe=jefe, Tel_Jefe=tel_jefe, Encargado_Prod=encargado_prod, Tel_Prod=tel_prod)
         
-        output_path = f'C:\\Users\\{username}\\Incye\\Proyectos - Documentos\\{ciudad}\\{codigo}\\09 Comunicados\\3_Docs\\{codigo}_CI_{custom_date_format}.docx'
+        output_path = f'C:\\Users\\{username}\\Incye\\France - Projets\\{codigo}\\09 Communiqués\\3_Docs\\{codigo}_CI_{custom_date_format}.docx'
+        #output_path = f'C:\\Users\\{username}\\Incye\\Ingenieria - Documentos\\{codigo}_CI_{custom_date_format}.docx'
         document.write(output_path)
         pdf_path = output_path.replace(".docx", ".pdf")
         docx2pdf.convert(output_path, pdf_path)
