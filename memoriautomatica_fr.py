@@ -805,7 +805,7 @@ class Applicationfr(tk.Frame):
             texto_apendice = "3. ANNEXES"
 
             # texto para meter las fórmulas de la temperatura
-            textotemp = "Si nous considérons une jonction rigide et parfaite entre toutes les pièces des butons et entre les butons et l’écran, l’effort axial additionnel du à la température est le suivant :"
+            textotemp = "Si nous considérons une jonction rigide et parfaite entre toutes les pièces des butons et entre les butons et l’écran, l’effort axial additionnel dû à la température est le suivant :"
             
             # Imagenes TDS del SuperSlim
             imagen_TDS_SS1 = "C:/Memorias y servidor/Aplicacion de Memorias/TDSs/SS/ANEJO SS-01.jpg"
