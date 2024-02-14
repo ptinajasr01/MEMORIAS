@@ -20,7 +20,6 @@ from docx.shared import Pt
 username = getpass.getuser()
 
 
-
 locale.setlocale(locale.LC_ALL, '')
 
 class DocumentEditor:
