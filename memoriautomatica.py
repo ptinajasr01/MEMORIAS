@@ -909,7 +909,7 @@ class Application(tk.Frame):
         "Juan José Morón.": "Juan José Morón Blanco.\nDelineante.\nDpto. Ingeniería INCYE.",
         "Manuel González.": "Manuel González-Arquiso Madrigal.\nIng. Téc. Agrícola.\nDpto. Ingeniería INCYE.",
         "Rafael Mansilla.": "Rafael Mansilla Correa.\nMáster Ingeniero de Caminos, CC. y PP.\nDpto. Ingeniería INCYE.",
-        "Esteban López.": "Esteban López Fernández.\nMáster Ingeniero de Caminos, CC. y PP.\nDpto. Ingeniería INCYE."
+        "Esteban López.": "Esteban López Fernández.\nMáster Ingeniero Civil.\nDpto. Ingeniería INCYE."
         }
 
         additional_info2 = {
