@@ -836,7 +836,7 @@ class Application(tk.Frame):
         self.label1 = ttk.Label(self.combobox_frame, text="Autor de la nota de cálculo", font=("Arial", 14))
         self.label1.grid(column=0, row=0, padx=11, pady=11)
         self.opcion_autor = tk.StringVar()
-        opciones = ("José M. Maldonado", "David Lara.", "Ezequiel Sánchez.", "Andrés Rodríguez.", "Jorge Nebreda.", "Alberto Aldama.", "Adelaida Sáez.", "Alejandro Ángel Builes.", "Juan José Morón.", "Manuel González.", "Rafael Mansilla.")
+        opciones = ("José M. Maldonado", "David Lara.", "Ezequiel Sánchez.", "Andrés Rodríguez.", "Jorge Nebreda.", "Alberto Aldama.", "Adelaida Sáez.", "Alejandro Ángel Builes.", "Juan José Morón.", "Manuel González.", "Rafael Mansilla.", "Esteban López.")
         self.combobox_autor = ttk.Combobox(self.combobox_frame, width=30, textvariable=self.opcion_autor, values=opciones, font=("Arial", 12), style='Custom.TCombobox')
         self.combobox_autor.current(0)
         self.combobox_autor.grid(column=0, row=1, padx=11, pady=11)
@@ -908,7 +908,8 @@ class Application(tk.Frame):
         "Alejandro Ángel Builes.": "Alejandro Ángel Builes.\nIngeniero Civil.\nDpto. Ingeniería INCYE.",
         "Juan José Morón.": "Juan José Morón Blanco.\nDelineante.\nDpto. Ingeniería INCYE.",
         "Manuel González.": "Manuel González-Arquiso Madrigal.\nIng. Téc. Agrícola.\nDpto. Ingeniería INCYE.",
-        "Rafael Mansilla.": "Rafael Mansilla Correa.\nMáster Ingeniero de Caminos, CC. y PP.\nDpto. Ingeniería INCYE."
+        "Rafael Mansilla.": "Rafael Mansilla Correa.\nMáster Ingeniero de Caminos, CC. y PP.\nDpto. Ingeniería INCYE.",
+        "Esteban López.": "Esteban López Fernández.\nMáster Ingeniero de Caminos, CC. y PP.\nDpto. Ingeniería INCYE."
         }
 
         additional_info2 = {
@@ -922,7 +923,8 @@ class Application(tk.Frame):
         "Alejandro Ángel Builes.": "AAB",
         "Juan José Morón.": "JJM",
         "Manuel González.": "MGM",
-        "Rafael Mansilla.": "RMC"
+        "Rafael Mansilla.": "RMC",
+        "Esteban López.": "ELF"
         }
 
         additional_info3 = {
@@ -936,7 +938,8 @@ class Application(tk.Frame):
         "Alejandro Ángel Builes.": "Madrid",
         "Juan José Morón.": "Sevilla",
         "Manuel González.": "Valladolid",
-        "Rafael Mansilla.": "Madrid"
+        "Rafael Mansilla.": "Madrid",
+        "Esteban López.": "Madrid",
         }
 
         autor_nota = additional_info.get(selected_option, "")
