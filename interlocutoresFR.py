@@ -165,10 +165,10 @@ class Application(tk.Frame):
         }
 
         additional_info3 = {
-        "MAD": "Alejandro/Luis Ismael",
+        "MAD": "Álvaro Abad",
         "BCN": "Julián",
         "BLB": "Luis Ismael",
-        "CRN": "Alejandro/Luis Ismael",
+        "CRN": "David Delgado",
         "EXP": "Luis Ismael",
         "FR": "Marty",
         "LEV": "Julián",
@@ -177,10 +177,10 @@ class Application(tk.Frame):
         }
 
         additional_info4 = {
-        "MAD": "676 554 345/624 402 367",
+        "MAD": "673 647 513",
         "BCN": "636 972 592",
         "BLB": "624 402 367",
-        "CRN": "676 554 345/624 402 367",
+        "CRN": "609 619 848",
         "EXP": "624 402 367",
         "FR": "Leyla",
         "LEV": "636 972 592",
