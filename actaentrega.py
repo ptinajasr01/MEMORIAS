@@ -197,7 +197,8 @@ class Application(tk.Frame):
         "": "Manuel González-Arquiso Madrigal",
         "RafaelMansilla.": "Rafael Mansilla Correa",
         "EstebanLopezFernande": "Esteban López Fernández", 
-        "PabloTinajas": "David Lara"
+        "PabloTinajas": "David Lara",
+        "FilippoBrusca": "Filippo Brusca"
         } 
 
         additional_info2 = {
@@ -212,7 +213,8 @@ class Application(tk.Frame):
         "": "Ing. Téc. Agrícola",
         "RafaelMansilla.": "Máster Ingeniero de Caminos, CC. y PP.", 
         "EstebanLopezFernande": "Máster Ingeniero de Caminos, CC. y PP.",
-        "PabloTinajas": "Máster Ingeniero de Caminos, CC. y PP."
+        "FilippoBrusca": "Máster Ingeniero de Caminos, CC. y PP.",
+        "FilippoBrusca": "Máster Ingeniero de Caminos, CC. y PP."
         }
 
         additional_info8 = {
@@ -254,7 +256,7 @@ class Application(tk.Frame):
         # Sustituimos valores
         document.merge(Nombre_Obra=nombre_obra, Estructura = estructura, Codigo = codigo, Fecha=formatted_date, Nombre_Cliente=nombre_cliente, NC=nc, Fecha2=fecha2, Tecnico=tecnico, Jefe=jefe, Titulacion=titulacion, M=m, Nota_Ad = nota_ad)
         
-        output_path = f'C:\\Users\\{username}\\Incye\\Proyectos - Documentos\\{ciudad}\\{codigo}\\07 Produccion\\{codigo}_ActaDeEntrega_{custom_date_format}.docx'
+        output_path = f'C:\\Users\\{username}\\Incye\\Proyectos - Documentos\\{ciudad}\\{codigo}\\07 Produccion\\2_Acta_Entrega\\{codigo}_ActaDeEntrega_{custom_date_format}.docx'
         document.write(output_path)
         pdf_path = output_path.replace(".docx", ".pdf")
         docx2pdf.convert(output_path, pdf_path)

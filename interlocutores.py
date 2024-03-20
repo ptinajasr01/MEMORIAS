@@ -161,7 +161,8 @@ class Application(tk.Frame):
         "": "Manuel González-Arquiso Madrigal",
         "RafaelMansilla.": "Rafael Mansilla Correa",
         "EstebanLopezFernande": "Esteban López Fernández", 
-        "PabloTinajas": "David Lara"
+        "FilippoBrusca": "Filippo Brusca",
+        "PabloTinajas": "Filippo Brusca"
         }
 
         additional_info2 = {
@@ -176,7 +177,8 @@ class Application(tk.Frame):
         "": "611 069 632",
         "RafaelMansilla.": "613 105 723", 
         "EstebanLopezFernande": "",
-        "PabloTinajas": "624 296 118"
+        "FilippoBrusca": "604 919 377",
+        "PabloTinajas": "614 111 939"
         }
 
         additional_info3 = {
