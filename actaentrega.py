@@ -91,7 +91,7 @@ class Application(tk.Frame):
         self.label1 = ttk.Label(self.combobox_frame, text="Jefe de Equipo", font=("Arial", 14))
         self.label1.grid(column=0, row=0, padx=11, pady=11)
         self.opcion_autor = tk.StringVar()
-        opciones = ("Alejandro Elías", "Emilio Fernández", "Fernando García", "José A. Sineiro", "Julián García", "Khalil Ghanfari", "Luis Ismael Rodríguez", "Luis Martínez", "Tomás González", "Aomar Buzeid", "Oumar Cisse", "Adrián Rodríguez", "Mayade Diagne", "Santiago Núñez")
+        opciones = ("Alejandro Elías", "Emilio Fernández", "Fernando García", "José A. Sineiro", "Julián García", "Khalil Ghanfari", "Luis Martínez", "Tomás González", "Aomar Buzeid", "Adrián Rodríguez", "Mayade Diagne", "Santiago Núñez", "Beñat Larinzgoitia", "Albert Petre", "Kevin Huacanca", "Johan Antezana")
         self.combobox_autor = ttk.Combobox(self.combobox_frame, width=30, textvariable=self.opcion_autor, values=opciones, font=("Arial", 12), style='Custom.TCombobox')
         self.combobox_autor.current(0)
         self.combobox_autor.grid(column=0, row=1, padx=11, pady=11)

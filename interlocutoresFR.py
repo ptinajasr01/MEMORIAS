@@ -87,7 +87,7 @@ class Application(tk.Frame):
         self.label1 = ttk.Label(self.combobox_frame, text="Jefe de Equipo", font=("Arial", 14))
         self.label1.grid(column=0, row=0, padx=11, pady=11)
         self.opcion_autor = tk.StringVar()
-        opciones = ("Alejandro Elías", "Emilio Fernández", "Fernando García", "José A. Sineiro", "Julián García", "Khalil Ghanfari", "Luis Ismael Rodríguez", "Luis Martínez", "Tomás González", "Aomar Buzeid", "Oumar Cisse", "Adrián Rodríguez", "Mayade Diagne", "Santiago Núñez")
+        opciones = ("Alejandro Elías", "Emilio Fernández", "Fernando García", "José A. Sineiro", "Julián García", "Khalil Ghanfari", "Luis Martínez", "Tomás González", "Aomar Buzeid", "Adrián Rodríguez", "Mayade Diagne", "Santiago Núñez", "Beñat Larinzgoitia", "Albert Petre", "Kevin Huacanca", "Johan Antezana")
         self.combobox_autor = ttk.Combobox(self.combobox_frame, width=30, textvariable=self.opcion_autor, values=opciones, font=("Arial", 12), style='Custom.TCombobox')
         self.combobox_autor.current(0)
         self.combobox_autor.grid(column=0, row=1, padx=11, pady=11)
@@ -142,7 +142,7 @@ class Application(tk.Frame):
         "AlejandroBuiles": "Alejandro Ángel Builes",
         "JuanJoseMoron": "Juan José Morón Blanco",
         "": "Manuel González-Arquiso Madrigal",
-        "RafaelMansilla.": "Rafael Mansilla Correa",
+        "RafaelMansilla": "Rafael Mansilla Correa",
         "EstebanLopezFernande": "Esteban López Fernández", 
         "PabloTinajas": "David Lara",
         "FilippoBrusca": "Filippo Brusca"
@@ -158,7 +158,7 @@ class Application(tk.Frame):
         "AlejandroBuiles": "+573126286401",
         "JuanJoseMoron": "627 197 867",
         "": "611 069 632",
-        "RafaelMansilla.": "613 105 723", 
+        "RafaelMansilla": "613 105 723", 
         "EstebanLopezFernande": "",
         "PabloTinajas": "624 296 118",
         "FilippoBrusca": "604 919 377"
@@ -233,7 +233,6 @@ class Application(tk.Frame):
         "AND": "malaga@incye.com"
         }  
 
-
         additional_info7 = {
         "Alejandro Elías": "676 554 345",
         "Emilio Fernández": "678 045 791",
@@ -241,14 +240,16 @@ class Application(tk.Frame):
         "José A. Sineiro": "628 467 283",
         "Julián García": "636 972 592",
         "Khalil Ghanfari": "627 191 627",
-        "Luis Ismael Rodríguez": "624 402 367",
         "Luis Martínez": "626 142 081",
         "Tomás González": "627 882 046",
         "Aomar Buzeid": "627 178 935",
-        "Oumar Cisse": "647 673 181",
         "Adrián Rodríguez": "647 673 189",
         "Mayade Diagne": "647 673 175",
         "Santiago Núñez": "647 673 207",
+        "Johan Antezana": "614 344 540",
+        "Kevin Huacanca": "647 673 181",
+        "Albert Petre": "672 230 480",
+        "Beñat Larinzgoitia": "645 008 790"
         }         
 
         tecnico = additional_info.get(username, "")
@@ -259,7 +260,7 @@ class Application(tk.Frame):
         tel_delegado = additional_info6.get(delegado, "")
         tel_jefe = additional_info7.get(jefe, "")
         email_delegado = additional_info8.get(delegado, "")
-
+        
         # Fechas
         current_date = datetime.datetime.now()
         formatted_date = current_date.strftime("%d/%m/%Y")
