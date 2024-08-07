@@ -44,7 +44,7 @@ class Application(tk.Frame):
         super().__init__(master)
         self.master = master
         self.master.title("Carta de interlocutores FRANCIA")
-        self.master.geometry("730x650")
+        self.master.geometry("730x798")
         self.master.configure(background="#F5F5F5")
         self.pack(fill=tk.BOTH, expand=True)
         self.create_widgets()
@@ -105,6 +105,18 @@ class Application(tk.Frame):
         self.combobox_revisor.current(0)
         self.combobox_revisor.grid(column=0, row=3, padx=11, pady=11)
 
+        # Segundo Revisor
+        self.combobox2_frame = tk.Frame(self, bg="#F5F5F5")
+        self.combobox2_frame.pack(pady=15)
+
+        self.label2 = ttk.Label(self.combobox2_frame, text="Segundo Revisor", font=("Arial", 14))
+        self.label2.grid(column=0, row=0, padx=11, pady=11)
+        self.opcion2_autor = tk.StringVar()
+        opciones3 = ("Álvaro Abad", "Santiago Venencia", "Antonio Vázquez", "Ignacio Merlín", "Álvaro Milla", "Javier Álvarez", "David Suárez", "Ana Seoane", "Luis José Iglesias", "Ismael Pérez", "Iván Valero", "Ibai Marlasca")
+        self.combobox2_autor = ttk.Combobox(self.combobox2_frame, width=30, textvariable=self.opcion2_autor, values=opciones3, font=("Arial", 12), style='Custom.TCombobox')
+        self.combobox2_autor.current(0)
+        self.combobox2_autor.grid(column=0, row=1, padx=11, pady=11)
+
         # Nota adicional
         self.not_frame = tk.Frame(self, bg="#F5F5F5")
         self.not_frame.pack(pady=15)
@@ -136,6 +148,7 @@ class Application(tk.Frame):
         jefe = self.combobox_autor.get()
         nota = self.combobox_revisor.get()
         fecha2 = self.fech_entry.get()
+        segundorevisor = self.combobox2_autor.get()
         
         if self.not_entry.get() != "":
             nota_ad = self.not_entry.get()
@@ -232,6 +245,21 @@ class Application(tk.Frame):
         "AND": "malaga@incye.com"
         }
 
+        additional_info12 = {
+        "Antonio Vázquez": ".",
+        "Ignacio Merlín": ".",
+        "David Suárez": ".",
+        "Ibai Marlasca": ".",
+        "Luis José Iglesias": ".", 
+        "Ana Seoane": ".",  
+        "Iván Valero": ".",
+        "Álvaro Milla": ".",
+        "Ismael Pérez": ".",
+        "Javier Álvarez": ".",
+        "Santiago Venencia": ", en qualité de Chef de Production de INCYE.", 
+        "Álvaro Abad": ", en qualité de Chef de Production de INCYE."
+        }  
+
         email_delegado = additional_info8.get(delegado, "")
         tecnico = additional_info.get(username, "")
         titulacion = additional_info2.get(username, "")
@@ -240,6 +268,7 @@ class Application(tk.Frame):
         current_date = datetime.datetime.now()
         formatted_date = current_date.strftime("%d/%m/%Y")
         custom_date_format = current_date.strftime("%y%m%d")
+        coletillaRV2 = additional_info12.get(segundorevisor, "")
 
         # Obtener los valores de las checkboxes
         checkbox_values = list(self.checkbar.state())
@@ -253,7 +282,7 @@ class Application(tk.Frame):
         document = MailMerge(template)
 
         # Sustituimos valores
-        document.merge(Nombre_Obra=nombre_obra, Estructura = estructura, Codigo = codigo, Fecha=formatted_date, Nombre_Cliente=nombre_cliente, NC=nc, Fecha2=fecha2, Tecnico=tecnico, Jefe=jefe, Titulacion=titulacion, M=m, Nota_Ad = nota_ad)
+        document.merge(Nombre_Obra=nombre_obra, Estructura = estructura, Codigo = codigo, Fecha=formatted_date, Nombre_Cliente=nombre_cliente, NC=nc, Fecha2=fecha2, Tecnico=tecnico, Jefe=jefe, Rev2=segundorevisor, coletilla=coletillaRV2, Titulacion=titulacion, M=m, Nota_Ad = nota_ad)
         
         output_path = f'C:\\Users\\{username}\\Incye\\France - Projets\\{codigo}\\07 Production\\2_Acta_Entrega\\{codigo}_ActaDeEntrega_{custom_date_format}.docx'
         document.write(output_path)
