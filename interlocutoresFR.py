@@ -80,6 +80,19 @@ class Application(tk.Frame):
         self.codigo_entry = tk.Entry(self.codigo_frame, font=("Helvetica", 14))
         self.codigo_entry.pack(side=tk.RIGHT, padx=15, expand=True, fill=tk.X)
 
+        # Delegado
+        self.combobox2_frame = tk.Frame(self, bg="#F5F5F5")
+        self.combobox2_frame.pack(pady=15)
+
+        self.label1 = ttk.Label(self.combobox2_frame, text="Delegado", font=("Arial", 14))
+        self.label1.grid(column=0, row=0, padx=11, pady=11)
+        self.opcion2_autor = tk.StringVar()
+        opciones2 = ("Xavier Marty", "Ilias Zaimi", "Youssef Benhammane")
+        self.combobox2_autor = ttk.Combobox(self.combobox2_frame, width=30, textvariable=self.opcion2_autor, values=opciones2, font=("Arial", 12), style='Custom.TCombobox')
+        self.combobox2_autor.current(0)
+        self.combobox2_autor.grid(column=0, row=1, padx=11, pady=11)
+
+
         # Jefe de Equipo 
         self.combobox_frame = tk.Frame(self, bg="#F5F5F5")
         self.combobox_frame.pack(pady=15)
@@ -112,6 +125,7 @@ class Application(tk.Frame):
         codigo = self.codigo_entry.get()
         ciudad = codigo[-2]  # Extract the city code from the work code
         jefe = self.combobox_autor.get()
+        delegado = self.combobox2_autor.get()
         
 
         workbook = openpyxl.load_workbook(f'C:\\Users\\{username}\\Incye\\France - Projets\\{codigo}\\01 Info\\{codigo}.xlsm')
@@ -120,7 +134,7 @@ class Application(tk.Frame):
         worksheet = workbook['DONÉES']
 
         # Extract data from specific cells and store them in variables
-        delegado = worksheet['C7'].value
+
         nombre_cliente = worksheet['C15'].value
         contacto_cliente = worksheet['C17'].value
         nombre_obra = worksheet['C19'].value
@@ -130,6 +144,7 @@ class Application(tk.Frame):
 
 
         # Close the workbook when done
+    
         workbook.close()
         
         additional_info = {
@@ -142,7 +157,7 @@ class Application(tk.Frame):
         "AlejandroBuiles": "Alejandro Ángel Builes",
         "JuanJoseMoron": "Juan José Morón Blanco",
         "": "Manuel González-Arquiso Madrigal",
-        "RafaelMansilla": "Rafael Mansilla Correa",
+        "RafaelMansilla": "Rafael Mansilla",
         "EstebanLopezFernande": "Esteban López Fernández", 
         "PabloTinajas": "David Lara",
         "FilippoBrusca": "Filippo Brusca"
@@ -166,71 +181,44 @@ class Application(tk.Frame):
 
         additional_info3 = {
         "MAD": "Álvaro Abad",
-        "BCN": "Julián",
-        "BLB": "Luis Ismael",
-        "CRN": "David Delgado",
-        "EXP": "Luis Ismael",
-        "FR": "Marty",
-        "LEV": "Julián",
-        "PT": "Julián",
-        "SEV": "Alejandro"
+        "BCN": "Santiago Venencia",
+        "BLB": "Santiago Venencia",
+        "CRN": "Álvaro Abad",
+        "EXP": "Álvaro Abad",
+        "FR": "-",
+        "LEV": "Álvaro Abad",
+        "PT": "Álvaro Abad",
+        "SEV": "Santiago Venencia"
         }
 
         additional_info4 = {
-        "MAD": "673 647 513",
-        "BCN": "636 972 592",
-        "BLB": "624 402 367",
-        "CRN": "609 619 848",
-        "EXP": "624 402 367",
-        "FR": "Leyla",
-        "LEV": "636 972 592",
-        "PT": "636 972 592",
-        "SEV": "676 554 345"
+        "MAD": "604 990 086",
+        "BCN": "604 855 366",
+        "BLB": "604 855 366",
+        "CRN": "604 990 086",
+        "EXP": "604 990 086",
+        "FR": "-",
+        "LEV": "604 990 086",
+        "PT": "604 990 086",
+        "SEV": "604 855 366"
         }
 
         additional_info5 = {
-        "AVS": "Antonio Vázquez Sánchez",
-        "CENT": "Ignacio Merlín López",
-        "BCN": "David Suárez",
-        "ASP": "Ana Seoane", 
-        "CRN": "Ana Seoane",
-        "SPG": "Sandra Pereira",
-        "BLB": "Ibai Marlasca",
-        "EXP": "Antonio Vázquez Sánchez",
-        "XM": "Xavier Marty",
-        "LEV": "Ismael Pérez",
-        "PT": "",
-        "AND": "Javier Álvarez"
+        "Xavier Marty": "Xavier Marty",
+        "Ilias Zaimi": "Ilias Zaimi",
+        "Youssef Benhammane": "Youssef Benhammane"
         }    
 
         additional_info6 = {
-        "AVS": "629 075 233",
-        "CENT": "615 201 952",
-        "BCN": "627 197 582",
-        "BLB": "623 255 811",
-        "ASP": "627 172 877", 
-        "CRN": "627 172 877",
-        "SPG": "609 619 848",        
-        "EXP": "",
-        "XM": "07 64 89 28 27",
-        "LEV": "611 069 601",
-        "PT": "",
-        "AND": "623 491 208"
+        "Xavier Marty": "+33 764 892 827",
+        "Ilias Zaimi": "+33 650 992 596",
+        "Youssef Benhammane": "+33 650 992 596"
         }    
 
         additional_info8 = {
-        "AVS": "antonio.vazquez@incye.com",
-        "CENT": "madrid@incye.com",
-        "BCN": "barcelona@incye.com",
-        "BLB": "bilbao@incye.com",
-        "ASP": "ana.seoane@incye.com", 
-        "CRN": "ana.seoane@incye.com",
-        "SPG": "galicia@incye.com",  
-        "EXP": "antonio.vazquez@incye.com",
-        "FRA": "xavier.marty@incye.com",
-        "LEV": "valencia@incye.com",
-        "PT": "",
-        "AND": "malaga@incye.com"
+        "Xavier Marty": "xavier.marty@incye.com",
+        "Ilias Zaimi": "paris@incye.com",
+        "Youssef Benhammane": "marseille@incye.com"
         }  
 
         additional_info7 = {

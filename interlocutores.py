@@ -61,7 +61,7 @@ class Application(tk.Frame):
         super().__init__(master)
         self.master = master
         self.master.title("Carta de interlocutores")
-        self.master.geometry("430x350")
+        self.master.geometry("430x450")
         self.master.configure(background="#F5F5F5")
         self.pack(fill=tk.BOTH, expand=True)
         self.create_widgets()
@@ -79,6 +79,18 @@ class Application(tk.Frame):
         self.codigo_label.pack(side=tk.LEFT, padx=15)
         self.codigo_entry = tk.Entry(self.codigo_frame, font=("Helvetica", 14))
         self.codigo_entry.pack(side=tk.RIGHT, padx=15, expand=True, fill=tk.X)
+
+        # Delegado
+        self.combobox2_frame = tk.Frame(self, bg="#F5F5F5")
+        self.combobox2_frame.pack(pady=15)
+
+        self.label1 = ttk.Label(self.combobox2_frame, text="Delegado", font=("Arial", 14))
+        self.label1.grid(column=0, row=0, padx=11, pady=11)
+        self.opcion2_autor = tk.StringVar()
+        opciones2 = ("Antonio Vázquez", "Ignacio Merlín", "Álvaro Milla", "Javier Álvarez", "David Suárez", "Ana Seoane", "Luis José Iglesias", "Ismael Pérez", "Iván Valero", "Ibai Marlasca")
+        self.combobox2_autor = ttk.Combobox(self.combobox2_frame, width=30, textvariable=self.opcion2_autor, values=opciones2, font=("Arial", 12), style='Custom.TCombobox')
+        self.combobox2_autor.current(0)
+        self.combobox2_autor.grid(column=0, row=1, padx=11, pady=11)
 
         # Jefe de Equipo 
         self.combobox_frame = tk.Frame(self, bg="#F5F5F5")
@@ -112,6 +124,7 @@ class Application(tk.Frame):
         codigo = self.codigo_entry.get()
         lciudad = codigo[-1]  # Extract the city code from the work code
         jefe = self.combobox_autor.get()
+        delegado = self.combobox2_autor.get()
 
         if lciudad == "M":
             ciudad = "MAD"
@@ -137,7 +150,7 @@ class Application(tk.Frame):
         worksheet = workbook['DATOS']
 
         # Extract data from specific cells and store them in variables
-        delegado = worksheet['C7'].value
+
         nombre_cliente = worksheet['C15'].value
         contacto_cliente = worksheet['C17'].value
         nombre_obra = worksheet['C19'].value
@@ -183,74 +196,65 @@ class Application(tk.Frame):
 
         additional_info3 = {
         "MAD": "Álvaro Abad",
-        "BCN": "Julián",
-        "BLB": "Luis Ismael",
-        "CRN": "David Delgado",
-        "EXP": "Luis Ismael",
-        "FRA": "Leyla",
-        "LEV": "Julián",
-        "PT": "Julián",
-        "SEV": "Alejandro"
+        "BCN": "Santiago Venencia",
+        "BLB": "Santiago Venencia",
+        "CRN": "Álvaro Abad",
+        "EXP": "Álvaro Abad",
+        "FR": "-",
+        "LEV": "Álvaro Abad",
+        "PT": "Álvaro Abad",
+        "SEV": "Santiago Venencia"
         }
 
         additional_info4 = {
-        "MAD": "673 647 513",
-        "BCN": "636 972 592",
-        "BLB": "624 402 367",
-        "CRN": "609 619 848",
-        "EXP": "624 402 367",
-        "FRA": "Leyla",
-        "LEV": "636 972 592",
-        "PT": "636 972 592",
-        "SEV": "676 554 345"
+        "MAD": "604 990 086",
+        "BCN": "604 855 366",
+        "BLB": "604 855 366",
+        "CRN": "604 990 086",
+        "EXP": "604 990 086",
+        "FR": "-",
+        "LEV": "604 990 086",
+        "PT": "604 990 086",
+        "SEV": "604 855 366"
         }
 
         additional_info5 = {
-        "AVS": "Antonio Vázquez Sánchez",
-        "CENT": "Ignacio Merlín López",
-        "BCN": "David Suárez",
-        "ASP": "Ana Seoane", 
-        "CRN": "Ana Seoane",
-        "GAL": "Ana Seoane",
-        "SPG": "Sandra Pereira",
-        "BLB": "Ibai Marlasca",
-        "EXP": "Antonio Vázquez Sánchez",
-        "FRA": "Leyla",
-        "LEV": "Ismael Pérez",
-        "PT": "",
-        "AND": "Javier Álvarez"
+        "Antonio Vázquez": "Antonio Vázquez Sánchez",
+        "Ignacio Merlín": "Ignacio Merlín López",
+        "Álvaro Milla": "Álvaro Milla",
+        "Javier Álvarez": "Javier Álvarez", 
+        "David Suárez": "David Suárez",
+        "Ana Seoane": "Ana Seoane",
+        "Luis José Iglesias": "Luis José Iglesias",
+        "Ismael Pérez": "Ismael Pérez",
+        "Iván Valero": "Iván Valero",
+        "Ibai Marlasca": "Ibai Marlasca"
         }    
 
         additional_info6 = {
-        "AVS": "629 075 233",
-        "CENT": "615 201 952",
-        "BCN": "627 197 582",
-        "BLB": "623 255 811",
-        "ASP": "627 172 877", 
-        "CRN": "627 172 877",
-        "GAL": "627 172 877",
-        "SPG": "609 619 848",        
-        "EXP": "",
-        "FRA": "",
-        "LEV": "611 069 601",
-        "PT": "",
-        "AND": "623 491 208"
+        "Antonio Vázquez": "629 075 233",
+        "Ignacio Merlín": "615 201 952",
+        "Álvaro Milla": "614 373 052",
+        "Javier Álvarez": "623 491 208", 
+        "David Suárez": "627 197 582",
+        "Ana Seoane": "627 172 877",
+        "Luis José Iglesias": "609 619 848",
+        "Ismael Pérez": "611 069 601",
+        "Iván Valero": "624 402 367",
+        "Ibai Marlasca": "623 255 811"
         }    
 
         additional_info8 = {
-        "AVS": "antonio.vazquez@incye.com",
-        "CENT": "madrid@incye.com",
-        "BCN": "barcelona@incye.com",
-        "BLB": "bilbao@incye.com",
-        "ASP": "ana.seoane@incye.com", 
-        "CRN": "ana.seoane@incye.com",
-        "GAL": "ana.seoane@incye.com",
-        "SPG": "galicia@incye.com",  
-        "EXP": "antonio.vazquez@incye.com",
-        "FRA": "leyla.bentahar@incye.com",
-        "LEV": "valencia@incye.com",
-        "PT": "",
-        "AND": "malaga@incye.com"
+        "Antonio Vázquez": "antonio.vazquez@incye.com",
+        "Ignacio Merlín": "madrid@incye.com",
+        "David Suárez": "barcelona@incye.com",
+        "Ibai Marlasca": "bilbao@incye.com",
+        "Luis José Iglesias": "vigo@incye.com", 
+        "Ana Seoane": "galicia@incye.com",  
+        "Iván Valero": "murcia@incye.com",
+        "Álvaro Milla": "sevilla@incye.com",
+        "Ismael Pérez": "valencia@incye.com",
+        "Javier Álvarez": "malaga@incye.com"
         }  
 
 
